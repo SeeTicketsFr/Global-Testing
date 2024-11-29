@@ -1,0 +1,25 @@
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+      target: dev
+    image: ui
+    environment:
+      - "NEXT_PUBLIC_API_PUBLIC_URL=http://localhost:8080"
+      - "HOSTNAME=0.0.0.0"
+      - "API_INTERNAL_URL=http://api"
+    ports:
+      - "80:3000"
+    volumes:
+      - ./:/app:rw
+      - /app/node_modules
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    name: proxy
+  internal:
+    name: internal

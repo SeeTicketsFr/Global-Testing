@@ -1,0 +1,23 @@
+App\Entity\SqsStep:
+    sqs_step (template):
+        scenario: '@scenario_1'
+        variables:
+            hello: world
+        runAfterFailure: false
+        url: sqsUrl
+        region: region
+        accessKey: accessKey
+        secretKey: secretKey
+        messageGroupId: 9a6ee19f-c799-4c19-a83f-83d8c8d00e58
+        content:
+          hello: world
+
+    sqs_step_1 (extends sqs_step):
+        id: 9a6ee19f-c799-4c19-a83f-83d8c8d00e06
+        name: Sqs step_1
+        stepNumber: 7
+
+    sqs_step_2 (extends sqs_step):
+        id: 9a6ee19f-c799-4c19-a83f-83d8c8d00e07
+        name: Sqs step_2
+        stepNumber: 8

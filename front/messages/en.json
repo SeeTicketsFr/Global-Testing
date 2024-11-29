@@ -1,0 +1,330 @@
+{
+    "home": {
+        "title": "Home",
+        "name": "Global Testing",
+        "header": {
+            "title": "Global Testing is the new to test your stack.",
+            "description": "Test your entire service flow effortlessly with our intuitive interface to guarantee communication and availability of your services",
+            "cta": "Get Started"
+        },
+        "sidebar": {
+            "navigation": "Navigation"
+        },
+        "badge_introduction": "Introducing Global Testing",
+        "description": {
+            "title": "Tool",
+            "description": "Use a tool adapted to your needs."
+        },
+        "grid": {
+            "files": {
+                "connection": {
+                    "title": "Connection between services",
+                    "description": "Test the connection between the SQS Queue and the API."  
+                },
+                "api": {
+                    "title": "API scenario",
+                    "description": "API user scenario with authentication, route calls, ..."
+                },
+                "website": {
+                    "title": "Website url",
+                    "description": "Test website url availability."
+                }
+            },
+            "features": {
+                "scenarios": {
+                    "name": "Scenarios",
+                    "description": "Create scenarios including steps to test your stack.",
+                    "cta": "Get Started"
+                },
+                "variables": {
+                    "name": "Variables",
+                    "description": "Search a variable to import. Perform mathematical operations, ...",
+                    "cta": "Get Started",
+                    "not_found": "No results found"
+                },
+                "cron": {
+                    "name": "Schedule",
+                    "description": "Schedule your scenarios with a cron.",
+                    "cta": "Get Started"
+                },
+                "save": {
+                    "name": "Data",
+                    "description": "We save your data.",
+                    "cta": "Get Started"
+                }
+            }
+        },
+        "footer": {
+            "built_by": "Built by",
+            "source_code": "The source code is available on"
+        }
+    },
+    "scenario": {
+        "name": "Scenarios",
+        "scenario": "Scenario",
+        "description": "This scenario contains {stepsCount} {stepsCount, plural, =0 {step} =1 {step} other {steps}}.",
+        "modify": "Modify",
+        "run": "Run",
+        "add": "Add scenario",
+        "input_name": "Name",
+        "input_add": "Name of the scenario...",
+        "deleteTitle": "Scenario deletion status",
+        "deleteDescription": "The scenario {scenarioName} has been deleted !",
+        "add_title": "Scenario creation status",
+        "add_description": "The scenario {scenarioName} has been created !",
+        "add_failed_description": "The creation of the scenario {scenarioName} failed !",
+        "runTitle": "Scenario running status",
+        "runDescription": "The scenario {scenarioName} is running !",
+        "settings": "Settings",
+        "modification_title": "Step modification status",
+        "modification_saved_description": "The scenario {scenarioName} has been modified !",
+        "modification_failed_description": "The modification of the scenario {scenarioName} failed !",
+        "confirmation": {
+            "confirmationTitle": "Confirmation",
+            "confirmationDeleteDescription": "Are you sure you want to delete this scenario ?",
+            "confirmationRunDescription": "Are you sure you want to run this scenario ?",
+            "yes": "Yes",
+            "no": "No"
+        }
+    },
+    "step": {
+        "dashboard": {
+            "variables": "Variables",
+            "headers": "Headers",
+            "content": "Content",
+            "check_conditions": "Check Conditions",
+            "treatments": "Treatments",
+            "conditions": "Conditions",
+            "scheduler": "Scheduler",
+            "executions": "Executions"
+        },
+        "step": "Step",
+        "steps": "Steps",
+        "add": "Add step",
+        "input_add": "Name of the step...",
+        "add_title": "Step creation status",
+        "add_description": "The step {stepName} has been created !",
+        "add_failed_description": "The creation of the step {stepName} failed !",
+        "modification_title": "Step modification status",
+        "modification_saved_description": "The step {stepName} has been modified !",
+        "all_modifications_saved_description": "The steps has been modified !",
+        "modification_failed_description": "The modification of the step {stepName} failed !",
+        "runAfterFailure": {
+            "title": "Run After Failure",
+            "description": "Run this step even if a previous step failed."
+        },
+        "save": "Save",
+        "save_all": "Save all",
+        "content": {
+            "add": "Add content",
+            "key": "Name/Key...",
+            "value": "Value...",
+            "no_content": "There is no content yet",
+            "valid": "Valid JSON format",
+            "invalid": "Invalid JSON format",
+            "write_json": "Write json content"
+        },
+        "headers": {
+            "add": "Add header",
+            "key": "Name/Key...",
+            "value": "Value...",
+            "no_header": "Add your first header"
+        },
+        "variables": {
+            "add": "Add variable",
+            "key": "Name/Key...",
+            "value": "Value...",
+            "no_variable": "Add your first variable"
+        },
+        "checkConditions": {
+            "add": "Add check condition",
+            "key": "Name/Key...",
+            "value": "Value...",
+            "no_checkCondition": "Add your first check condition"
+        },
+        "treatment": {
+            "add": "Add treatment",
+            "variable_name": "Variable name...",
+            "content_location": "Content location...",
+            "condition_key": "Condition Name/Key...",
+            "condition_value": "Condition value...",
+            "add_condition": "Add condition",
+            "no_treatment": "Add your first treatment",
+            "valid": "Valid JSON format",
+            "invalid": "Invalid JSON format",
+            "write_json": "Write json content"
+        },
+        "conditions": {
+            "add": "Add condition",
+            "key": "Name/Key...",
+            "value": "Value...",
+            "no_condition": "Add your first condition"
+        },
+        "loop_conditions": {
+            "add": "Add condition",
+            "variable_name": "Variable name...",
+            "value": "Value...",
+            "default_value": "Default value...",
+            "no_condition": "Add your first condition"
+        },
+        "stepToReturn": {
+            "select": "Select step to return...",
+            "search": "Search step...",
+            "step_not_found": "No step found."
+        },
+        "duration": {
+            "hours": "Hours",
+            "minutes": "Minutes",
+            "seconds": "Seconds",
+            "total_milliseconds": "Total Milliseconds"
+        },
+        "cron": {
+            "no_cron": "Schedule the execution of this scenario",
+            "add": "Add a cron"
+        },
+        "confirmation": {
+            "confirmationTitle": "Confirmation",
+            "confirmationDeleteDescription": "Are you sure you want to delete this step ({stepName}) ?",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "region": "Region",
+        "url": "Url",
+        "accessKey": "Access key",
+        "secretKey": "Secret key",
+        "message_group_id": "Message group id"
+    },
+    "themes": {
+        "title": "Modify theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+    },
+    "infos": {
+        "no_resource": "No resources available"
+    },
+    "errors": {
+        "default": "An error occured : "
+    },
+    "executions": {
+        "view": {
+            "columns": {
+                "id": "id",
+                "name": "Name",
+                "status": "Status"
+            },
+            "total_duration": "Total duration",
+            "coming_soon": "Coming soon...",
+            "simple": "Simple",
+            "detailed": "Detailed",
+            "failure": "Failed",
+            "successful": "Successful",
+            "request": "Request",
+            "response": "Response"
+        },
+        "loading": "Loading...",
+        "execution": "Execution",
+        "no_results": "No results.",
+        "previous": "Previous",
+        "next": "Next",
+        "id_execution": "Execution ID",
+        "id_scenario": "Scenario ID",
+        "created_at": "Execution date",
+        "access_log": "Access logs",
+        "total_items": "Total of {totalItems} execution(s).",
+        "metrics": {
+            "title": "Executions Metrics",
+            "total": "Total execution runs",
+            "success": "Success rate",
+            "failure": "Failure rate"
+        }
+    },
+    "save": {
+        "not_saved": "Changes not saved"
+    },
+    "help": {
+        "help": "Help",
+        "help_description": "Welcome to our Global-Testing tool ! \n\n Here are a few tips to help you master our tool : \n",
+        "first_section": {
+            "title": "1. Variable import\n",
+            "description": "When modifying a step, you can import variable values using a simple syntax. \n Type `<<` in a text field to display all the variables you can import. When you click on one of them, the import syntax is added to the text field."
+        },
+        "second_section": {
+            "title": "2. Arithmetic operations\n",
+            "description": "You can perform arithmetic calculations using the same syntax as for variable import. To do this, write `<<` in a text field to select the four operations (addition, subtraction, multiplication, division). \n What's more, you can import variables instead of numbers if you want to use dynamic numbers."
+        },
+        "third_section": {
+            "title": "3. View all executions\n",
+            "description": "You can view all executions by going to scenario configuration, then to the 'Executions' tab."
+        },
+        "fourth_section": {
+            "title": "4. Change the order of steps\n",
+            "description": "You can change the order of the steps by holding down the icon next to the step in the steps list, and moving it in the list. \n Note that this will save all the steps."
+        },
+        "data_importation_title": "Data importation examples",
+        "importations": "Importations",
+        "result": "Results",
+        "complementary_data": "Complementary Data"
+    },
+    "api_documentations": {
+        "manage": "Manage your API documentations",
+        "no_result": "Add your first API Documentation to simplify your scenario creation process",
+        "table": {
+            "columns": {
+                "name": "Name",
+                "url": "Url",
+                "actions": {
+                    "title": "Actions",
+                    "open_menu": "Open menu",
+                    "actions": "Actions",
+                    "edit": "Edit",
+                    "delete": "Delete"
+                }
+            },
+            "total_items": "Total of {totalItems} api documentation(s).",
+            "previous": "Previous",
+            "next": "Next"
+        },
+        "creation": {
+            "add": "Add api documentation",
+            "input_name": "Name",
+            "placeholder_input_name": "Name of the api documentation...",
+            "input_url": "Url",
+            "placeholder_input_url": "Url of the api documentation...",
+            "add_title": "Api documentation creation status",
+            "add_description": "The api documentation {apiDocumentationName} has been created !",
+            "add_failed_description": "The creation of the api documentation {apiDocumentationName} failed !"
+        },
+        "modification": {
+            "modification": "Modify api documentation",
+            "modification_title": "Api documentation modification status",
+            "modification_description": "The api documentation {apiDocumentationName} has been modified !",
+            "modification_failed_description": "The modification of the api documentation {apiDocumentationName} failed !"
+        },
+        "autocompletion": {
+            "form": {
+                "cta": "Autocomplete with API documentation",
+                "title": "Autocompletion",
+                "documentation": {
+                    "title": "Documentation",
+                    "trigger": "Select an API Documentation...",
+                    "search": "Search...",
+                    "group": "Api Documentation(s)"
+                },
+                "path": {
+                    "title": "Path/Route",
+                    "trigger": "Select a path/route...",
+                    "search": "Search...",
+                    "group": "Api Documentation(s)"
+                },
+                "method": {
+                    "title": "Method",
+                    "trigger": "Select a method...",
+                    "search": "Search...",
+                    "group": "Method(s)"
+                },
+                "validation": "Autocomplete"
+            }
+        }
+    }
+}

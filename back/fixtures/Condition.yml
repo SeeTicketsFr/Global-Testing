@@ -1,0 +1,13 @@
+parameters:
+  conditionResponseUser: '<<r:steps[1]:content[user][id]>>'
+  conditionCount: '<<v:steps[2]:count>>'
+
+App\Entity\POPO\Condition:
+    condition_1 :
+        dynamicValue: '<{conditionCount}>'
+        defaultValue: 0
+        value: 1
+    
+    condition_2 :
+        dynamicValue: '<{conditionResponseUser}>'
+        value: '1eeda308-58fc-6c3c-b6ad-8986caf87262'

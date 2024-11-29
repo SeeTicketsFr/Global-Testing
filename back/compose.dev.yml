@@ -1,0 +1,60 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    networks:
+      - proxy
+      - internal
+
+  consumer: &consumer
+    restart: always
+    build:
+        context: .
+        target: frankenphp_dev
+        args:
+          - RELEASE_VERSION=beta
+    image: back
+    environment:
+      SERVER_NAME: :80
+      DATABASE_URL: postgresql://${POSTGRES_DB_USER}:${POSTGRES_DB_PASSWORD}@${POSTGRES_DB_HOST}:${POSTGRES_DB_PORT}/${POSTGRES_DB_NAME}
+      MESSENGER_TRANSPORT_DSN: amqp://guest:guest@rabbitmq:5672/%2f/messages
+      TRUSTED_HOSTS: ^${SERVER_NAME:-example\.com|localhost}|php$$
+      MERCURE_EXTRA_DIRECTIVES: demo
+      MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+      MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+      MERCURE_URL: ${CADDY_MERCURE_URL:-http://api/.well-known/mercure}
+      MERCURE_PUBLIC_URL: http://localhost/.well-known/mercure
+      MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+      PUBLIC_URL: http://localhost:8080
+      PUBLIC_FRONT_URL: http://localhost
+    command: php bin/console messenger:consume async -vv
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - ./:/app
+      - ./frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./frankenphp/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
+    networks:
+      - proxy
+      - internal
+    depends_on:
+      - rabbitmq
+
+  scheduler:
+    <<: *consumer
+    command: php bin/console messenger:consume scheduler_crons --limit=500000 --time-limit=300 -vv
+
+  api:
+    <<: *consumer
+    ports:
+      - '8080:80'
+    command: frankenphp run --config /etc/caddy/Caddyfile --watch
+
+networks:
+  proxy:
+    name: proxy
+  internal:
+    name: internal
+
+volumes:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,23 @@
+App\Entity\ApiDocumentation:
+    api_documentation (template):
+        url: http://localhost/api.json
+
+    api_documentation_1 (extends api_documentation) :
+        id: 1ee35bf0-d4ab-6220-996d-4143beb0712b
+        name: API Documentation 1
+
+    api_documentation_2 (extends api_documentation) :
+        id: 1ee35bf0-d4ab-6220-996d-4143beb0724c
+        name: API Documentation 2
+
+    api_documentation_3 (extends api_documentation) :
+        id: 1ee35bf0-d4ab-6220-996d-4143beb0736d
+        name: API Documentation 3
+
+    api_documentation_4 (extends api_documentation) :
+        id: 1ee35bf0-d4ab-6220-996d-4143beb0748e
+        name: API Documentation 4
+
+    api_documentation_5 (extends api_documentation) :
+        id: 1ee35bf0-d4ab-6220-996d-4143beb0760f
+        name: API Documentation 5

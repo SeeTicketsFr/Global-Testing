@@ -1,0 +1,6 @@
+App\Entity\ScenarioMetrics:
+    scenario_metrics_1:
+        id: 0c7b8a3d-8f32-4e3d-9d41-61a95b4d9d79
+        scenario: '@scenario_1'
+        totalExecutions: 2
+        successExecutions: 1

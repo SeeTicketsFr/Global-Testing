@@ -1,0 +1,177 @@
+parameters:
+  urlStep1: "<<v:scenario:api_url_path>><<v:steps[1]:api_url_endpoint>>"
+  emailContentStep1: "<<v:steps[1]:email>>"
+  emailVariableStep1: "globaltesting<<v:steps[1]:email_end>>"
+  emailEndVariableStep1: "@seetickets.fr"
+
+App\Entity\POPO\Logs\LogLoopStep:
+    loop_step_popo (template):
+        stepToReturn: 1
+        runAfterFailure: false
+        variables:
+            hello: world
+
+    loop_step_popo_1 (extends loop_step_popo):
+        id: 016b1d91-a7f1-6728-90bc-ae10cbff93cb
+        name: Loop step_1
+        stepNumber: 3
+        conditions: ['@condition_1']
+
+    loop_step_popo_2 (extends loop_step_popo):
+        id: 016b1d91-a7f1-6728-90bc-ae10cbff93cc
+        name: Loop step_2
+        stepNumber: 4
+        conditions: ['@condition_2']
+
+App\Entity\POPO\Logs\LogSleepStep:
+    sleep_step_popo (template):
+        duration: 3000
+        runAfterFailure: false
+        variables:
+            hello: world
+
+    sleep_step_popo_1 (extends sleep_step_popo):
+        id: 9a6ee19f-c799-4c19-a83f-83d8c8d00e04
+        name: Sleep step_1
+        stepNumber: 5
+
+    sleep_step_popo_2 (extends sleep_step_popo):
+        id: 9a6ee19f-c799-4c19-a83f-83d8c8d00e05
+        name: Sleep step_2
+        stepNumber: 6
+
+App\Entity\POPO\Logs\LogSqsStep:
+    sqs_step_popo (template):
+        variables:
+            hello: world
+        runAfterFailure: false
+        url: sqsUrl
+        region: region
+        accessKey: accessKey
+        secretKey: secretKey
+        messageGroupId: 9a6ee19f-c799-4c19-a83f-83d8c8d00e58
+        content:
+          hello: world
+
+    sqs_step_popo_1 (extends sqs_step_popo):
+        id: 9a6ee19f-c799-4c19-a83f-83d8c8d00e06
+        name: Sqs step_1
+        stepNumber: 7
+
+    sqs_step_popo_2 (extends sqs_step_popo):
+        id: 9a6ee19f-c799-4c19-a83f-83d8c8d00e07
+        name: Sqs step_2
+        stepNumber: 8
+
+App\Entity\POPO\Logs\LogHttpStep:
+    http_step_popo (template):
+        method: POST
+        url: '<{urlStep1}>'
+        headers:
+          Content-Type: 'application/json'
+          x-app-info: 'GlobalTesting-New#dev'
+        content: 
+          email: '<{emailContentStep1}>'
+          password: 'password'
+        variables:
+          api_url_endpoint: /api/authentication_token
+          email: '<{emailVariableStep1}>'
+          email_end: '<{emailEndVariableStep1}>'
+        checkConditions:
+          statusCode: '200'
+        runAfterFailure: false
+
+    http_step_popo_1 (extends http_step_popo):
+        id: 016b1d91-75c5-6a0a-90b8-b781ff774a24
+        name: Http step_1
+        stepNumber: 1
+        treatment: ['@treatment_1']
+
+    http_step_popo_2 (extends http_step_popo):
+        id: 9c86d386-5d0a-4db9-86f9-4c160a3ebaa8
+        name: Http step_2
+        stepNumber: 2
+        treatment: ['@treatment_2']
+
+    http_step_popo_3_error (extends http_step_popo):
+        id: 016b1d91-75c5-6a0a-90b8-b781ff774a25
+        name: Http step_1
+        stepNumber: 1
+        treatment: ['@treatment_1']
+        error: 'Error message'
+
+App\Entity\Log:
+    log (template):
+        idScenario: 016b1d91-a8df-6a09-90c2-56d8e6ef1fb6
+
+    log_1 (extends log):
+        id: 1ee35bf0-d4ab-6220-996d-4143beb0742b
+        idExecution: bb3970fe-c58b-4a64-8030-f7dc5bb4fac1
+        idStep: 016b1d91-75c5-6a0a-90b8-b781ff774a24
+        humanDescription: This is a fake log
+        step: '@http_step_popo_1'
+        createdAt: <(new DateTime('2024-07-02 17:16:01.5428'))>
+
+    log_2 (extends log):
+        id: 1ee3c16c-8868-6e8a-ab3a-9f93c24e4a49
+        idExecution: bb3970fe-c58b-4a64-8030-f7dc5bb4fac1
+        idStep: 9c86d386-5d0a-4db9-86f9-4c160a3ebaa8
+        humanDescription: This is a second fake log
+        step: '@http_step_popo_2'
+        createdAt: <(new DateTime('2024-07-02 17:16:03.1230'))>
+
+    log_3 (extends log):
+        id: 1ee3c16c-8868-6e8a-ab3a-9f93c24e4a48
+        idExecution: bb3970fe-c58b-4a64-8030-f7dc5bb4fac1
+        idStep: 016b1d91-a7f1-6728-90bc-ae10cbff93cb
+        humanDescription: This is a third fake log
+        step: '@loop_step_popo_1'
+        createdAt: <(new DateTime('2024-07-02 17:16:03.4567'))>
+
+    log_4 (extends log):
+        id: 1ee3c16c-8868-6e8a-ab3a-9f93c24e4a47
+        idExecution: bb3970fe-c58b-4a64-8030-f7dc5bb4fac1
+        idStep: 016b1d91-a7f1-6728-90bc-ae10cbff93cc
+        humanDescription: This is a third fake log
+        step: '@loop_step_popo_2'
+        createdAt: <(new DateTime('2024-07-02 17:16:03.4567'))>
+
+    log_5 (extends log):
+        id: 1ee3c16c-8868-6e8a-ab3a-9f93c24e4a46
+        idExecution: bb3970fe-c58b-4a64-8030-f7dc5bb4fac1
+        idStep: 9a6ee19f-c799-4c19-a83f-83d8c8d00e04
+        humanDescription: This is a fourth fake log
+        step: '@sleep_step_popo_1'
+        createdAt: <(new DateTime('2024-07-02 17:16:07.8910'))>
+
+    log_6 (extends log):
+        id: 1ee3c16c-8868-6e8a-ab3a-9f93c24e4a45
+        idExecution: bb3970fe-c58b-4a64-8030-f7dc5bb4fac1
+        idStep: 9a6ee19f-c799-4c19-a83f-83d8c8d00e05
+        humanDescription: This is a fifth fake log
+        step: '@sleep_step_popo_2'
+        createdAt: <(new DateTime('2024-07-02 17:16:07.8910'))>
+
+    log_7 (extends log):
+        id: 1ee3c16c-8868-6e8a-ab3a-9f93c24e4a44
+        idExecution: bb3970fe-c58b-4a64-8030-f7dc5bb4fac1
+        idStep: 9a6ee19f-c799-4c19-a83f-83d8c8d00e06
+        humanDescription: This is a sixth fake log
+        step: '@sqs_step_popo_1'
+        createdAt: <(new DateTime('2024-07-02 17:16:07.8910'))>
+
+    log_8 (extends log):
+        id: 1ee3c16c-8868-6e8a-ab3a-9f93c24e4a43
+        idExecution: bb3970fe-c58b-4a64-8030-f7dc5bb4fac1
+        idStep: 9a6ee19f-c799-4c19-a83f-83d8c8d00e07
+        humanDescription: This is a seventh fake log
+        step: '@sqs_step_popo_2'
+        createdAt: <(new DateTime('2024-07-02 17:16:07.8910'))>
+
+    log_9 (extends log):
+        id: 1ee3c16c-8868-6e8a-ab3a-9f93c24e4a42
+        idExecution: bb3970fe-c58b-4a64-8030-f7dc5bb4fac2
+        idStep: 016b1d91-75c5-6a0a-90b8-b781ff774a24
+        humanDescription: This is a error fake log
+        step: '@http_step_popo_3_error'
+        createdAt: <(new DateTime('2024-07-02 17:16:01.5428'))>

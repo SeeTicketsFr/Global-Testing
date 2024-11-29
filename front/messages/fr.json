@@ -1,0 +1,326 @@
+{
+    "home": {
+        "title": "Accueil",
+        "name": "Global Testing",
+        "header": {
+            "title": "Global Testing \n Testez votre flux de services.",
+            "description": "Testez sans effort l'ensemble de votre flux de services grâce à notre interface intuitive pour garantir la communication et la disponibilité de vos services.",
+            "cta": "Commencer dès maintenant"
+        },
+        "sidebar": {
+            "navigation": "Navigation"
+        },
+        "badge_introduction": "Introduction du Global Testing",
+        "description": {
+            "title": "Outil",
+            "description": "Utiliser un outil adapté à vos besoins."
+        },
+        "grid": {
+            "files": {
+                "connection": {
+                    "title": "Connexion entre les services",
+                    "description": "Tester la connexion entre la file d'attente SQS et une API."
+                },
+                "api": {
+                    "title": "Scénario API",
+                    "description": "Scénario d'utilisation de l'API avec authentification, appels de route, ..."
+                },
+                "website": {
+                    "title": "Url d'un site web",
+                    "description": "Tester la disponibilité de l'url d'un site web."
+                }
+            },
+            "features": {
+                "scenarios": {
+                    "name": "Scénarios",
+                    "description": "Créez des scénarios comprenant des étapes pour tester vos services.",
+                    "cta": "Commencer dès maintenant"
+                },
+                "variables": {
+                    "name": "Variables",
+                    "description": "Rechercher une variable à importer. Effectuer des opérations mathématiques, ...",
+                    "cta": "Commencer dès maintenant",
+                    "not_found": "Aucun résultat"
+                },
+                "cron": {
+                    "name": "Planifier",
+                    "description": "Planifiez vos scénarios avec un cron.",
+                    "cta": "Commencer dès maintenant"
+                },
+                "save": {
+                    "name": "Données",
+                    "description": "Nous sauvegardons vos données.",
+                    "cta": "Commencer dès maintenant"
+                }
+            }
+        },
+        "footer": {
+            "built_by": "Produit par",
+            "source_code": "Le code source est disponible sur"
+        }
+    },
+    "scenario": {
+        "name": "Scénarios",
+        "scenario": "Scénario",
+        "description": "Ce scenario contient {stepsCount} {stepsCount, plural, =0 {étape} =1 {étape} other {étapes}}.",
+        "modify": "Modifier",
+        "run": "Exécuter",
+        "add": "Ajouter un scénario",
+        "input_name": "Nom",
+        "input_add": "Nom du scénario...",
+        "deleteTitle": "Status de suppression de scénario",
+        "deleteDescription": "Le scénario {scenarioName} a été supprimé !",
+        "add_title": "Status de création de scénario",
+        "add_description": "Le scénario {scenarioName} a été ajouté !",
+        "add_failed_description": "La création du scénario {scenarioName} a échoué !",
+        "runTitle": "Status d'exécution de scénario",
+        "runDescription": "Le scénario {scenarioName} est en train de s'exécuter !",
+        "settings": "Paramètres",
+        "confirmation": {
+            "confirmationTitle": "Confirmation",
+            "confirmationDeleteDescription": "Êtes-vous sûr de vouloir supprimer ce scénario ?",
+            "confirmationRunDescription": "Êtes-vous sûr de vouloir exécuter ce scénario ?",
+            "yes": "Oui",
+            "no": "Non"
+        }
+    },
+    "step": {
+        "dashboard": {
+            "variables": "Variables",
+            "headers": "En-têtes",
+            "content": "Corps",
+            "check_conditions": "Conditions de validité",
+            "treatments": "Traitements",
+            "conditions": "Conditions",
+            "scheduler": "Planification",
+            "executions": "Exécutions"
+        },
+        "step": "Étape",
+        "steps": "Étapes",
+        "add": "Ajouter une étape",
+        "input_add": "Nom de l'étape...",
+        "add_title": "Status de création d'étape",
+        "add_description": "L'étape {stepName} a été ajoutée !",
+        "add_failed_description": "La création de l'étape {stepName} a échoué !",
+        "modification_title": "Status de modification d'étape",
+        "modification_saved_description": "L'étape {stepName} a été modifié !",
+        "all_modifications_saved_description": "Toutes les étapes ont été modifiées !",
+        "modification_failed_description": "La modification de l'étape {stepName} a échoué !",
+        "runAfterFailure": {
+            "title": "Exécuter après un échec",
+            "description": "Exécuter cette étape même si une précédente étape a échoué."
+        },
+        "save": "Enregistrer",
+        "save_all": "Enregistrer tout",
+        "content": {
+            "add": "Ajouter un contenu",
+            "key": "Nom/Clé...",
+            "value": "Valeur...",
+            "no_content": "Il n'y a pas encore de contenu",
+            "valid": "Format du JSON valide",
+            "invalid": "Format du JSON invalide",
+            "write_json": "Ajouter un JSON"
+        },
+        "headers": {
+            "add": "Ajouter un en-tête",
+            "key": "Nom/Clé...",
+            "value": "Valeur...",
+            "no_header": "Ajoutez votre premier en-tête"
+        },
+        "variables": {
+            "add": "Ajouter une variable",
+            "key": "Nom/Clé...",
+            "value": "Valeur...",
+            "no_variable": "Ajoutez votre première variable"
+        },
+        "checkConditions": {
+            "add": "Ajouter une condition de validité",
+            "key": "Nom/Clé...",
+            "value": "Valeur...",
+            "no_checkCondition": "Ajoutez votre première condition de validité"
+        },
+        "treatment": {
+            "add": "Ajouter un traitement de données",
+            "variable_name": "Nom de la variable...",
+            "content_location": "Localisation du contenu...",
+            "condition_key": "Nom/Clé de la condition...",
+            "condition_value": "Valeur de la condition...",
+            "add_condition": "Ajouter une condition",
+            "no_treatment": "Ajoutez votre premier traitement de données",
+            "valid": "Format du JSON valide",
+            "invalid": "Format du JSON invalide",
+            "write_json": "Ajouter un JSON"
+        },
+        "conditions": {
+            "add": "Ajouter une condition d'arrêt",
+            "key": "Nom/Clé...",
+            "value": "Valeur...",
+            "no_condition": "Ajoutez votre première condition d'arrêt"
+        },
+        "loop_conditions": {
+            "add": "Ajouter une condition d'arrêt",
+            "variable_name": "Nom de la variable...",
+            "value": "Valeur...",
+            "default_value": "Valeur par défaut...",
+            "no_condition": "Ajoutez votre première condition d'arrêt"
+        },
+        "stepToReturn": {
+            "select": "Sélectionner une étape...",
+            "search": "Chercher une étape...",
+            "step_not_found": "Aucune étape trouvée."
+        },
+        "duration": {
+            "hours": "Heures",
+            "minutes": "Minutes",
+            "seconds": "Secondes",
+            "total_milliseconds": "Millisecondes Totales"
+        },
+        "cron": {
+            "no_cron": "Planifier l'exécution de ce scénario",
+            "add": "Ajouter un cron"
+        },
+        "confirmation": {
+            "confirmationTitle": "Confirmation",
+            "confirmationDeleteDescription": "Êtes-vous sûr de vouloir supprimer cette étape ({stepName}) ?",
+            "yes": "Oui",
+            "no": "Non"
+        },
+        "region": "Région",
+        "url": "Url",
+        "accessKey": "Clé d'accès",
+        "secretKey": "Clé secrète",
+        "message_group_id": "Identifiant du groupe de messages"
+    },
+    "themes": {
+        "title": "Modifier le thème",
+        "light": "Clair",
+        "dark": "Sombre",
+        "system": "Système"
+    },
+    "infos": {
+        "no_resource": "Aucune ressource disponible"
+    },
+    "errors": {
+        "default": "Une erreur est survenue : "
+    },
+    "executions": {
+        "view": {
+            "columns": {
+                "id": "id",
+                "name": "Nom",
+                "status": "Statut"
+            },
+            "total_duration": "Durée totale",
+            "coming_soon": "À venir...",
+            "simple": "Simple",
+            "detailed": "Détaillé",
+            "failure": "Échec",
+            "successful": "Réussie",
+            "request": "Requête",
+            "response": "Réponse"
+        },
+        "loading": "Chargement des données...",
+        "execution": "Exécution",
+        "no_results": "Aucun résultat.",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "id_execution": "Identifiant d'exécution",
+        "id_scenario": "Identifiant du scénario",
+        "created_at": "Date d'exécution",
+        "access_log": "Accèder aux logs",
+        "total_items": "Total de {totalItems} exécution(s).",
+        "metrics": {
+            "title": "Analyse des exécutions",
+            "total": "Nombre total d'exécutions",
+            "success": "Taux de réussite",
+            "failure": "Taux d'échec"
+        }
+    },
+    "save": {
+        "not_saved": "Modifications non enregistrées"
+    },
+    "help": {
+        "help": "Aide",
+        "help_description": "Bienvenue sur notre outil Global-Testing ! \n\n Voici plusieurs astuces pour maitriser notre outil : \n",
+        "first_section": {
+            "title": "1. Importation de variable\n",
+            "description": "Lors de la modification d'une étape, vous pouvez importer la valeur des variables à l'aide d'une syntaxe simple. \n Écrivez `<<` dans un champ de texte pour afficher toutes les variables que vous pouvez importer. Lorsque vous cliquer sur une d'entre elles, la syntaxe d'importation s'ajoute dans le champ de texte."
+        },
+        "second_section": {
+            "title": "2. Opérations arithmétiques\n",
+            "description": "Vous pouvez effectuer des calculs arithmétiques via la même syntaxe que celle de l'importation de variable. Pour cela, écrivez `<<` dans un champ de texte pour pouvoir sélectionner les quatre opérations (addition, soustraction, multiplication, division).\n De plus, vous pouvez importer des variables à la place des nombres si vous souhaitez utiliser des nombres dynamiques."
+        },
+        "third_section": {
+            "title": "3. Visionner toutes les exécutions\n",
+            "description": "Vous pouvez visionner toutes les exécutions en allant dans la configuration du scénario, puis dans l'onglet 'Exécutions'."
+        },
+        "fourth_section": {
+            "title": "4. Modifier l'ordre des étapes\n",
+            "description": "Vous pouvez modifier l'ordre des étapes en restant appuyer sur l'icône à côté de l'étape se trouvant dans la liste des étapes, et en la déplaçant dans la liste. \n Attention, cela sauvegardera toutes les étapes."
+        },
+        "data_importation_title": "Exemples d'importation de variable",
+        "importations": "Importations",
+        "result": "Résultats",
+        "complementary_data": "Données complémentaires"
+    },
+    "api_documentations": {
+        "manage": "Gérez vos documentations API",
+        "no_result": "Ajoutez votre première documentation API pour simplifier votre processus de création de scénarios",
+        "table": {
+            "columns": {
+                "name": "Nom",
+                "url": "Url",
+                "actions": {
+                    "title": "Actions",
+                    "open_menu": "Ouvrir le menu",
+                    "actions": "Actions",
+                    "edit": "Modifier",
+                    "delete": "Supprimer"
+                }
+            },
+            "total_items": "Total de {totalItems} api documentation(s).",
+            "previous": "Précédent",
+            "next": "Suivant"
+        },
+        "creation": {
+            "add": "Ajouter une documentation api",
+            "input_name": "Nom",
+            "placeholder_input_name": "Nom de la documentation api...",
+            "input_url": "Url",
+            "placeholder_input_url": "Url de la documentation api...",
+            "add_title": "Status de création de la documentation api",
+            "add_description": "La documentation api {apiDocumentationName} a été ajoutée !",
+            "add_failed_description": "La création de la documentation api {apiDocumentationName} a échoué !"
+        },
+        "modification": {
+            "modification_title": "Status de modification de la documentation api",
+            "modification_description": "La documentation api {apiDocumentationName} a été modifiée !",
+            "modification_failed_description": "La modification de la documentation api {apiDocumentationName} a échoué !"
+        },
+        "autocompletion": {
+            "form": {
+                "cta": "Saisie automatique avec une documentation API",
+                "title": "Saisie automatique",
+                "documentation": {
+                    "title": "Documentation",
+                    "trigger": "Sélectionnez une documentation API...",
+                    "search": "Recherche...",
+                    "group": "Documentation(s) API"
+                },
+                "path": {
+                    "title": "Chemin/Route",
+                    "trigger": "Sélectionnez un chemin/route...",
+                    "search": "Recherche...",
+                    "group": "Chemin(s)/Route(s)"
+                },
+                "method": {
+                    "title": "Méthode",
+                    "trigger": "Sélectionnez une méthode...",
+                    "search": "Recherche...",
+                    "group": "Méthode(s)"
+                },
+                "validation": "Saisie automatique"
+            }
+        }
+    }
+}

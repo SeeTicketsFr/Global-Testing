@@ -1,0 +1,52 @@
+# services.yaml
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\OpenApi\OpenApiFactory:
+        decorates: 'api_platform.openapi.factory'
+        arguments: [ '@App\OpenApi\OpenApiFactory.inner' ]
+        autoconfigure: false
+
+    App\Scheduler\Crons\CronsScheduleProvider:
+        arguments:
+            $logger: '@logger'
+
+    App\Command\TestsLoadFixturesCommand:
+        bind:
+            $environment: '%kernel.environment%'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+when@test:
+    services:
+        mercure.hub.default:
+            class: App\Tests\Functional\Stub\HubStub
+            arguments:
+                $url: '%env(MERCURE_URL)%'
+                $jwtProvider: '@mercure.jwt_provider'
+                $jwtFactory: '@mercure.jwt_factory'
+                $publicUrl: '%env(MERCURE_PUBLIC_URL)%'
+
+        mercure.jwt_provider:
+            class: Symfony\Component\Mercure\Jwt\StaticTokenProvider
+            arguments:
+                $token: '%env(MERCURE_JWT_SECRET)%'
+
+        mercure.jwt_factory:
+            class: Symfony\Component\Mercure\Jwt\LcobucciFactory
+            arguments:
+                $secret: '%env(MERCURE_JWT_SECRET)%'

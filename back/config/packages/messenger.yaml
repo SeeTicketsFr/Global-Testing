@@ -1,0 +1,41 @@
+parameters:
+    messenger.transport.async.dsn : '%env(MESSENGER_TRANSPORT_DSN)%'
+
+framework:
+    messenger:
+        default_bus: default.bus
+        buses:
+            default.bus:
+                default_middleware: true
+                middleware:
+                    - doctrine_ping_connection
+                    - doctrine_close_connection
+                    - validation
+
+        transports:
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+            async:
+                dsn: '%messenger.transport.async.dsn%'
+                retry_strategy:
+                    delay: 0
+                    max_retries: 3
+                serializer: messenger.transport.native_php_serializer
+
+        routing:
+            # Route your messages to the transports
+            App\Messenger\Handler\Scenario\ScenarioMessage: async
+            App\Messenger\Handler\Http\HttpMessage: async
+            App\Messenger\Handler\Loop\LoopMessage: async
+            App\Messenger\Handler\Sleep\SleepMessage: async
+            App\Messenger\Handler\Sqs\SqsMessage: async
+
+when@test:
+    framework:
+        messenger:
+            transports:
+                failed_default: 
+                    dsn: 'in-memory://?serialize=true'
+                failed_async: 
+                    dsn: 'in-memory://?serialize=true'
+                failed_webhook: 
+                    dsn: 'in-memory://?serialize=true'

@@ -1,0 +1,17 @@
+App\Entity\SleepStep:
+    sleep_step (template):
+        scenario: '@scenario_1'
+        duration: 3000
+        runAfterFailure: false
+        variables:
+            hello: world
+
+    sleep_step_1 (extends sleep_step):
+        id: 9a6ee19f-c799-4c19-a83f-83d8c8d00e04
+        name: Sleep step_1
+        stepNumber: 5
+
+    sleep_step_2 (extends sleep_step):
+        id: 9a6ee19f-c799-4c19-a83f-83d8c8d00e05
+        name: Sleep step_2
+        stepNumber: 6

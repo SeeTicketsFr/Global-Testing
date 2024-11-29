@@ -1,0 +1,19 @@
+App\Entity\LoopStep:
+    loop_step (template):
+        scenario: '@scenario_1'
+        stepToReturn: 1
+        runAfterFailure: false
+        variables:
+            hello: world
+
+    loop_step_1 (extends loop_step):
+        id: 016b1d91-a7f1-6728-90bc-ae10cbff93cb
+        name: Loop step_1
+        stepNumber: 3
+        conditions: ['@condition_1']
+
+    loop_step_2 (extends loop_step):
+        id: 016b1d91-a7f1-6728-90bc-ae10cbff93cc
+        name: Loop step_2
+        stepNumber: 4
+        conditions: ['@condition_2']

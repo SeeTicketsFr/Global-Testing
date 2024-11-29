@@ -1,0 +1,16 @@
+App\Entity\POPO\Treatment:
+    treatment_1 :
+        variableName: varName
+        contentLocation: contLocation
+        conditions: {
+          userId: '123',
+          token: '321'
+        }
+    
+    treatment_2 :
+        variableName: varName2
+        contentLocation: contLocation2
+        conditions: {
+          userId: '456',
+          token: '678'
+        }
