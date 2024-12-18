@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ApiDocumentationProvider implements ProviderInterface
 {
     /**
-     * @param \ApiPlatform\State\ProviderInterface<ApiDocumentation> $itemProvider
+     * @param ProviderInterface<ApiDocumentation> $itemProvider
      */
     public function __construct(
         #[Autowire(service: 'api_platform.doctrine.orm.state.item_provider')]
