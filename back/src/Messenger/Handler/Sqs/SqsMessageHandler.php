@@ -33,12 +33,15 @@ final class SqsMessageHandler extends AbstractMessageHandler
     use LoggerTrait;
     use replaceDynamicVariablesTrait;
 
-    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager)
+    private ?SqsClient $sqsClient;
+
+    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager, ?SqsClient $sqsClient = null)
     {
         parent::__construct($bus);
         $this->setPropertyAccess(PropertyAccess::createPropertyAccessor());
         $this->setEntityManager($entityManager);
         $this->setHandlerName(SqsLogs::HANDLER_NAME->value);
+        $this->sqsClient = $sqsClient;
     }
 
     public function __invoke(SqsMessage $message): void
@@ -63,11 +66,13 @@ final class SqsMessageHandler extends AbstractMessageHandler
 
             [$url, $region, $accessKey, $secretKey, $messageGroupId, $content] = $this->replaceDynamicVariables($context, $step, $step->getUrl(), $step->getRegion(), $step->getAccessKey(), $step->getSecretKey(), $step->getMessageGroupId(), $step->getContent(), $step->getVariables());
 
-            $sqsClient = $this->createClient('latest', $region, $accessKey, $secretKey);
+            if (null === $this->sqsClient) {
+                $this->sqsClient = $this->createClient('latest', $region, $accessKey, $secretKey);
+            }
             $content = json_encode($content);
             $params = $this->createParams($url, $content ?: '', $messageGroupId, (string) rand());
 
-            $result = $sqsClient->sendMessage($params);
+            $result = $this->sqsClient->sendMessage($params);
             $stepInContext = $this->updateContext($context, $step, $result);
 
             $nextStepMessage = $this->getNextStep($context, $step->getStepNumber() + 1);
