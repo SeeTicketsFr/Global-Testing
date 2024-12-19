@@ -16,6 +16,8 @@ class AwsSqsMock extends SqsClient
     }
 
     /**
+     * @param array<string, mixed> $args
+     *
      * @return Result<string, mixed>
      */
     public function sendMessage($args = []): Result

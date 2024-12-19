@@ -205,7 +205,7 @@ class SqsMessageHandlerTest extends AbstractApiTestCase
          * @var Log[] $logs
          */
         $logs = $entityRepository->findBy(['idExecution' => $idExecution]);
-        // $this->assertEquals(count($expectedLogs), \count($logs));
+        $this->assertEquals(\count($expectedLogs), \count($logs));
 
         $humanDescriptions = array_map(
             static fn (Log $log) => $log->getHumanDescription(),
