@@ -41,7 +41,7 @@ services:
 
   scheduler:
     <<: *consumer
-    command: php bin/console messenger:consume scheduler_crons --limit=500000 --time-limit=300 -vv
+    command: php bin/console messenger:consume scheduler_crons scheduler_dataretention --limit=500000 --time-limit=300 -vv
 
   api:
     <<: *consumer
