@@ -8,8 +8,10 @@ App\Entity\Scenario:
         id: 016b1d91-a8df-6a09-90c2-56d8e6ef1fb6
         name: Scenario 1
         steps: ['@http_step_1', '@http_step_2', '@loop_step_1', '@loop_step_2', '@sleep_step_1', '@sleep_step_2', '@sqs_step_1', '@sqs_step_2']
+        webhooks: ['@webhook_1']
 
     scenario_2 (extends scenario):
         id: 016b1d91-a8df-6a09-90c2-56d8e6ef1fc7
         name: Scenario 2
         steps: []
+        webhooks: []

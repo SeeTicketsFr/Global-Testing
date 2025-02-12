@@ -1,0 +1,8 @@
+App\Entity\Webhook:
+    webhook (template):
+        scenario: '@scenario_1'
+
+    webhook_1 (extends webhook) :
+        id: 1ee35bf0-d4ab-6220-996d-4143beb0724e
+        eventType: <(App\Entity\Enum\WebhookEventType::ON_FAILURE)>
+        url: https://url.domain.net/api
