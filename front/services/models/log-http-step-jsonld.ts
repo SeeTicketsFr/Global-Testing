@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadContext } from './abstract-step-jsonld-scenario-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read-metrics-read-context';
+import { AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext } from './abstract-step-jsonld-scenario-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read-metrics-read-webhook-read-context';
 // May contain unused imports in some cases
 // @ts-ignore
 import { HttpResponseJsonld } from './http-response-jsonld';
@@ -31,10 +31,10 @@ import { TreatmentJsonld } from './treatment-jsonld';
 export interface LogHttpStepJsonld {
     /**
      * 
-     * @type {AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadContext}
+     * @type {AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext}
      * @memberof LogHttpStepJsonld
      */
-    '@context'?: AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadContext;
+    '@context'?: AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext;
     /**
      * 
      * @type {string}
@@ -103,10 +103,10 @@ export interface LogHttpStepJsonld {
     'url'?: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {{ [key: string]: string; }}
      * @memberof LogHttpStepJsonld
      */
-    'content'?: Array<string>;
+    'content'?: { [key: string]: string; };
     /**
      * 
      * @type {{ [key: string]: string; }}

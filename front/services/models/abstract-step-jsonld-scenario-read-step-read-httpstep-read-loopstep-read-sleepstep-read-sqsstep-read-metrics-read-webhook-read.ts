@@ -16,111 +16,60 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import { AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext } from './abstract-step-jsonld-scenario-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read-metrics-read-webhook-read-context';
-// May contain unused imports in some cases
-// @ts-ignore
-import { SqsResponseJsonld } from './sqs-response-jsonld';
 
 /**
  * 
  * @export
- * @interface LogSqsStepJsonld
+ * @interface AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
  */
-export interface LogSqsStepJsonld {
+export interface AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead {
     /**
      * 
      * @type {AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext}
-     * @memberof LogSqsStepJsonld
+     * @memberof AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     '@context'?: AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext;
     /**
      * 
      * @type {string}
-     * @memberof LogSqsStepJsonld
+     * @memberof AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     '@id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof LogSqsStepJsonld
+     * @memberof AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     '@type'?: string;
     /**
      * 
-     * @type {SqsResponseJsonld}
-     * @memberof LogSqsStepJsonld
-     */
-    'response'?: SqsResponseJsonld | null;
-    /**
-     * 
      * @type {string}
-     * @memberof LogSqsStepJsonld
+     * @memberof AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof LogSqsStepJsonld
+     * @memberof AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     'name': string;
     /**
      * 
      * @type {number}
-     * @memberof LogSqsStepJsonld
+     * @memberof AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     'stepNumber': number;
     /**
      * 
      * @type {{ [key: string]: string; }}
-     * @memberof LogSqsStepJsonld
+     * @memberof AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     'variables'?: { [key: string]: string; };
     /**
      * 
      * @type {boolean}
-     * @memberof LogSqsStepJsonld
+     * @memberof AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     'runAfterFailure'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof LogSqsStepJsonld
-     */
-    'error'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof LogSqsStepJsonld
-     */
-    'url'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LogSqsStepJsonld
-     */
-    'region'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LogSqsStepJsonld
-     */
-    'accessKey'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LogSqsStepJsonld
-     */
-    'secretKey'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LogSqsStepJsonld
-     */
-    'messageGroupId'?: string;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof LogSqsStepJsonld
-     */
-    'content'?: { [key: string]: string; };
 }
 

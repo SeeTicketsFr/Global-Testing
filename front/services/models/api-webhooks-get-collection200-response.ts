@@ -21,36 +21,36 @@ import { ApiApiDocumentationsGetCollection200ResponseHydraSearch } from './api-a
 import { ApiApiDocumentationsGetCollection200ResponseHydraView } from './api-api-documentations-get-collection200-response-hydra-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from './scenario-jsonld-scenario-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read-metrics-read-webhook-read';
+import { WebhookJsonldWebhookRead } from './webhook-jsonld-webhook-read';
 
 /**
  * 
  * @export
- * @interface ApiScenariosGetCollection200Response
+ * @interface ApiWebhooksGetCollection200Response
  */
-export interface ApiScenariosGetCollection200Response {
+export interface ApiWebhooksGetCollection200Response {
     /**
      * 
-     * @type {Array<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>}
-     * @memberof ApiScenariosGetCollection200Response
+     * @type {Array<WebhookJsonldWebhookRead>}
+     * @memberof ApiWebhooksGetCollection200Response
      */
-    'hydra:member': Array<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>;
+    'hydra:member': Array<WebhookJsonldWebhookRead>;
     /**
      * 
      * @type {number}
-     * @memberof ApiScenariosGetCollection200Response
+     * @memberof ApiWebhooksGetCollection200Response
      */
     'hydra:totalItems'?: number;
     /**
      * 
      * @type {ApiApiDocumentationsGetCollection200ResponseHydraView}
-     * @memberof ApiScenariosGetCollection200Response
+     * @memberof ApiWebhooksGetCollection200Response
      */
     'hydra:view'?: ApiApiDocumentationsGetCollection200ResponseHydraView;
     /**
      * 
      * @type {ApiApiDocumentationsGetCollection200ResponseHydraSearch}
-     * @memberof ApiScenariosGetCollection200Response
+     * @memberof ApiWebhooksGetCollection200Response
      */
     'hydra:search'?: ApiApiDocumentationsGetCollection200ResponseHydraSearch;
 }

@@ -2,12 +2,13 @@ import { formatScenario } from '@/app/_store/utils';
 import { ICurrentApiDocumentationFile } from '@/app/_type/ApiDocumentation';
 import { Scenario, ScenarioExecution } from '@/app/_type/Scenario';
 import { StepsAppTyped, } from '@/app/_type/Step';
-import { ApiDocumentation, ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead } from '@/services';
+import { ApiDocumentation, ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead, Webhook } from '@/services';
 import { atom } from 'jotai';
 
-export const initialScenarioAtom = atom<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead>({
+export const initialScenarioAtom = atom<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>({
     name: 'no scenario',
     steps: [],
+    webhooks: [],
     variables: {},
     cron: "",
     metrics: null
@@ -34,3 +35,6 @@ export const currentScenarioExecution = atom<(ScenarioExecution|null)>(null);
 export const apiDocumentationsAtom = atom<ApiDocumentation[]>([])
 
 export const currentApiDocumentationFileAtom = atom<ICurrentApiDocumentationFile|null>(null);
+
+
+export const webhooksAtom = atom<Webhook[]>([])

@@ -96,7 +96,8 @@
             "treatments": "Treatments",
             "conditions": "Conditions",
             "scheduler": "Scheduler",
-            "executions": "Executions"
+            "executions": "Executions",
+            "webhooks": "Webhooks"
         },
         "step": "Step",
         "steps": "Steps",
@@ -265,6 +266,38 @@
         "importations": "Importations",
         "result": "Results",
         "complementary_data": "Complementary Data"
+    },
+    "webhooks": {
+        "manage": "Manage your webhooks",
+        "no_result": "Add your first webhook",
+        "table": {
+            "columns": {
+                "event_type": "Event Type",
+                "url": "Url",
+                "actions": {
+                    "title": "Actions",
+                    "open_menu": "Open menu",
+                    "actions": "Actions",
+                    "edit": "Edit",
+                    "delete": "Delete"
+                }
+            },
+            "total_items": "Total of {totalItems} webhook(s).",
+            "previous": "Previous",
+            "next": "Next"
+        },
+        "creation": {
+            "add": "Add webhook",
+            "input_event_type": "Type",
+            "placeholder_input_event_type": "Event Type of the webhook...",
+            "input_url": "Url",
+            "placeholder_input_url": "Url of the webhook...",
+            "add_title": "Webhook creation status"
+        },
+        "modification": {
+            "modification": "Modify webhook",
+            "modification_title": "Webhook modification status"
+        }
     },
     "api_documentations": {
         "manage": "Manage your API documentations",

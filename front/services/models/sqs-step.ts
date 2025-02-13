@@ -88,9 +88,9 @@ export interface SqsStep {
     'messageGroupId'?: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {{ [key: string]: string; }}
      * @memberof SqsStep
      */
-    'content'?: Array<string>;
+    'content'?: { [key: string]: string; };
 }
 

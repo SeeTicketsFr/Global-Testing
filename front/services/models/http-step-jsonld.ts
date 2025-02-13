@@ -73,10 +73,10 @@ export interface HttpStepJsonld {
     'url'?: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {{ [key: string]: string; }}
      * @memberof HttpStepJsonld
      */
-    'content'?: Array<string>;
+    'content'?: { [key: string]: string; };
     /**
      * 
      * @type {{ [key: string]: string; }}

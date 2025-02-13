@@ -20,68 +20,52 @@ import { AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstep
 /**
  * 
  * @export
- * @interface LogSleepStepJsonld
+ * @interface WebhookJsonldWebhookRead
  */
-export interface LogSleepStepJsonld {
+export interface WebhookJsonldWebhookRead {
     /**
      * 
      * @type {AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext}
-     * @memberof LogSleepStepJsonld
+     * @memberof WebhookJsonldWebhookRead
      */
     '@context'?: AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext;
     /**
      * 
      * @type {string}
-     * @memberof LogSleepStepJsonld
+     * @memberof WebhookJsonldWebhookRead
      */
     '@id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof LogSleepStepJsonld
+     * @memberof WebhookJsonldWebhookRead
      */
     '@type'?: string;
     /**
      * 
      * @type {string}
-     * @memberof LogSleepStepJsonld
+     * @memberof WebhookJsonldWebhookRead
      */
-    'id'?: string;
+    'id': string;
     /**
      * 
      * @type {string}
-     * @memberof LogSleepStepJsonld
+     * @memberof WebhookJsonldWebhookRead
      */
-    'name': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof LogSleepStepJsonld
-     */
-    'stepNumber': number;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof LogSleepStepJsonld
-     */
-    'variables'?: { [key: string]: string; };
-    /**
-     * 
-     * @type {boolean}
-     * @memberof LogSleepStepJsonld
-     */
-    'runAfterFailure'?: boolean;
+    'eventType': WebhookJsonldWebhookReadEventTypeEnum;
     /**
      * 
      * @type {string}
-     * @memberof LogSleepStepJsonld
+     * @memberof WebhookJsonldWebhookRead
      */
-    'error'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof LogSleepStepJsonld
-     */
-    'duration'?: number;
+    'url': string;
 }
+
+export const WebhookJsonldWebhookReadEventTypeEnum = {
+    on_failure: 'onFailure',
+    on_success: 'onSuccess'
+} as const;
+
+export type WebhookJsonldWebhookReadEventTypeEnum = typeof WebhookJsonldWebhookReadEventTypeEnum[keyof typeof WebhookJsonldWebhookReadEventTypeEnum];
+
 

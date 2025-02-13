@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { ApiScenariosGetCollection200Response } from '../models';
 // @ts-ignore
-import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead } from '../models';
+import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from '../models';
 // @ts-ignore
 import { ScenarioJsonldScenarioWrite } from '../models';
 // @ts-ignore
@@ -397,7 +397,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          */
 
 
-        async scenariosIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead>> {
+        async scenariosIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.scenariosIdGet(id, options);
 
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
@@ -411,7 +411,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 
-                async scenariosIdPatch(id: string, data: ScenarioScenarioWrite, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead>> {
+                async scenariosIdPatch(id: string, data: ScenarioScenarioWrite, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>> {
 
                 const localVarAxiosArgs = await localVarAxiosParamCreator.scenariosIdPatch(id, data, options);
 
@@ -426,7 +426,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 
-                async scenariosIdPut(id: string, data: ScenarioJsonldScenarioWrite, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead>> {
+                async scenariosIdPut(id: string, data: ScenarioJsonldScenarioWrite, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>> {
 
                 const localVarAxiosArgs = await localVarAxiosParamCreator.scenariosIdPut(id, data, options);
 
@@ -440,7 +440,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 
-                async scenariosPost(data: ScenarioJsonldScenarioWrite, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead>> {
+                async scenariosPost(data: ScenarioJsonldScenarioWrite, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>> {
 
                 const localVarAxiosArgs = await localVarAxiosParamCreator.scenariosPost(data, options);
 

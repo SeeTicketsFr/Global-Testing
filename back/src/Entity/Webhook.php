@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Enum\WebhookEventType;
+use App\State\WebhookProvider;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -12,6 +14,24 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ApiResource(
+    paginationItemsPerPage: 10,
+    paginationClientItemsPerPage: true,
+    operations: [
+        new GetCollection(
+            uriTemplate: '/webhooks/scenarios/{idScenario}',
+            uriVariables: [
+                'idScenario',
+            ],
+            provider: WebhookProvider::class,
+        ),
+    ],
+    normalizationContext: [
+        'groups' => ['webhook:read'],
+    ],
+)]
+#[ApiResource(
+    paginationItemsPerPage: 10,
+    paginationClientItemsPerPage: true,
     normalizationContext: [
         'groups' => ['webhook:read'],
     ],

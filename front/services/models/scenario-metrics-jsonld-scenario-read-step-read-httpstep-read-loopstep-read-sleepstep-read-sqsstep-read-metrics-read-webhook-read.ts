@@ -20,68 +20,44 @@ import { AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstep
 /**
  * 
  * @export
- * @interface LogSleepStepJsonld
+ * @interface ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
  */
-export interface LogSleepStepJsonld {
+export interface ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead {
     /**
      * 
      * @type {AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext}
-     * @memberof LogSleepStepJsonld
+     * @memberof ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     '@context'?: AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext;
     /**
      * 
      * @type {string}
-     * @memberof LogSleepStepJsonld
+     * @memberof ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     '@id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof LogSleepStepJsonld
+     * @memberof ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     '@type'?: string;
     /**
      * 
      * @type {string}
-     * @memberof LogSleepStepJsonld
+     * @memberof ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
     'id'?: string;
     /**
      * 
-     * @type {string}
-     * @memberof LogSleepStepJsonld
+     * @type {number}
+     * @memberof ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
-    'name': string;
+    'totalExecutions': number;
     /**
      * 
      * @type {number}
-     * @memberof LogSleepStepJsonld
+     * @memberof ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
      */
-    'stepNumber': number;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof LogSleepStepJsonld
-     */
-    'variables'?: { [key: string]: string; };
-    /**
-     * 
-     * @type {boolean}
-     * @memberof LogSleepStepJsonld
-     */
-    'runAfterFailure'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof LogSleepStepJsonld
-     */
-    'error'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof LogSleepStepJsonld
-     */
-    'duration'?: number;
+    'successExecutions': number;
 }
 

@@ -21,36 +21,36 @@ import { ApiApiDocumentationsGetCollection200ResponseHydraSearch } from './api-a
 import { ApiApiDocumentationsGetCollection200ResponseHydraView } from './api-api-documentations-get-collection200-response-hydra-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from './scenario-jsonld-scenario-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read-metrics-read-webhook-read';
+import { LogJsonldLogReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepRead } from './log-jsonld-log-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read';
 
 /**
  * 
  * @export
- * @interface ApiScenariosGetCollection200Response
+ * @interface ApiLogsIdExecutionGetCollection200Response
  */
-export interface ApiScenariosGetCollection200Response {
+export interface ApiLogsIdExecutionGetCollection200Response {
     /**
      * 
-     * @type {Array<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>}
-     * @memberof ApiScenariosGetCollection200Response
+     * @type {Array<LogJsonldLogReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepRead>}
+     * @memberof ApiLogsIdExecutionGetCollection200Response
      */
-    'hydra:member': Array<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>;
+    'hydra:member': Array<LogJsonldLogReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepRead>;
     /**
      * 
      * @type {number}
-     * @memberof ApiScenariosGetCollection200Response
+     * @memberof ApiLogsIdExecutionGetCollection200Response
      */
     'hydra:totalItems'?: number;
     /**
      * 
      * @type {ApiApiDocumentationsGetCollection200ResponseHydraView}
-     * @memberof ApiScenariosGetCollection200Response
+     * @memberof ApiLogsIdExecutionGetCollection200Response
      */
     'hydra:view'?: ApiApiDocumentationsGetCollection200ResponseHydraView;
     /**
      * 
      * @type {ApiApiDocumentationsGetCollection200ResponseHydraSearch}
-     * @memberof ApiScenariosGetCollection200Response
+     * @memberof ApiLogsIdExecutionGetCollection200Response
      */
     'hydra:search'?: ApiApiDocumentationsGetCollection200ResponseHydraSearch;
 }
