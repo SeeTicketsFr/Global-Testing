@@ -71,7 +71,7 @@ class SleepMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Sleep step_1', 'handler' => SleepLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => false,
-            'dbQueryCount' => 8,
+            'dbQueryCount' => 9,
         ];
 
         yield 'SleepStep with next step' => [
@@ -98,7 +98,7 @@ class SleepMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Sleep step_1', 'handler' => SleepLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => true,
-            'dbQueryCount' => 7,
+            'dbQueryCount' => 8,
         ];
     }
 

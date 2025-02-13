@@ -78,7 +78,7 @@ class SqsMessageHandlerTest extends AbstractApiTestCase
         if ($sqsStep->getContext()) {
             $sqsStep->getContext()->setSteps(new ArrayCollection());
         }
-        yield 'HttpStep : step not in the context' => [
+        yield 'SqsStep : step not in the context' => [
             'sqsMessage' => $sqsStep,
             'expectedLogs' => [
                 Logs::BEGIN_STEP->getLog(['name' => 'Sqs step_1', 'handler' => SqsLogs::HANDLER_NAME->value]),
@@ -109,7 +109,7 @@ class SqsMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Sqs step_1', 'handler' => SqsLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => false,
-            'dbQueryCount' => 8,
+            'dbQueryCount' => 9,
         ];
 
         yield 'SqsStep with next step' => [
@@ -144,7 +144,7 @@ class SqsMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Sqs step_1', 'handler' => SqsLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => true,
-            'dbQueryCount' => 7,
+            'dbQueryCount' => 8,
         ];
     }
 

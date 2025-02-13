@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Entity\Enum\WebhookEventType;
 use App\Entity\Scenario;
 use App\Tests\Traits\TestCollectionGetTrait;
 use App\Tests\Traits\TestItemGetTrait;
@@ -45,6 +46,13 @@ class ScenarioApiTest extends AbstractApiTestCase
                         'api_url_path' => 'https://url.domain.net/api',
                     ],
                     'cron' => '* * * * *',
+                    'webhooks' => [
+                        0 => [
+                            'id' => '1ee35bf0-d4ab-6220-996d-4143beb0724e',
+                            'eventType' => WebhookEventType::ON_FAILURE->value,
+                            'url' => 'https://url.domain.net/api',
+                        ],
+                    ],
                     'steps' => [
                         0 => [
                             'id' => '016b1d91-75c5-6a0a-90b8-b781ff774a24',
@@ -172,9 +180,10 @@ class ScenarioApiTest extends AbstractApiTestCase
                         'api_url_path' => 'https://updated_url.domain.net/api',
                     ],
                     'cron' => '1 * * * *',
+                    'webhooks' => [],
                     'steps' => [],
                 ], null,
-                7,
+                8,
             ],
         ];
     }
