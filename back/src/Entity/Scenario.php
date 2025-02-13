@@ -41,9 +41,9 @@ class Scenario
     /**
      * @var Collection<int, Webhook>
      */
-    #[ORM\OneToMany(mappedBy: 'scenario', targetEntity: Webhook::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'scenario', targetEntity: Webhook::class, cascade: ['persist', 'remove'], fetch: 'EAGER')]
     #[Groups(['webhook:read'])]
-    private ?Collection $webhooks;
+    private Collection $webhooks;
 
     /**
      * @var array<string, string>
@@ -131,7 +131,7 @@ class Scenario
     /**
      * @return Collection<int, Webhook>
      */
-    public function getWebhooks(): ?Collection
+    public function getWebhooks(): Collection
     {
         return $this->webhooks;
     }

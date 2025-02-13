@@ -24,7 +24,7 @@ final class DeleteLogsMessageHandler
 
         $qb->delete('App\Entity\Log', 'l')
             ->where('l.createdAt < :dateLimit')
-            ->setParameter('dateLimit', new \DateTime('-7 days')) # TODO: data retention settings on UI
+            ->setParameter('dateLimit', new \DateTime('-7 days')) // TODO: data retention settings on UI
             ->getQuery()
             ->execute();
     }

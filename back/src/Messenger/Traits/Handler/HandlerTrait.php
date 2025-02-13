@@ -4,15 +4,20 @@ namespace App\Messenger\Traits\Handler;
 
 use App\Entity\AbstractStep;
 use App\Entity\Context;
+use App\Entity\Enum\WebhookEventType;
+use App\Entity\Scenario;
+use App\Entity\Webhook;
 use App\Messenger\Enum\Logs;
 use App\Messenger\Handler\AbstractMessage;
 use App\Messenger\Traits\Metrics\MetricsTrait;
+use App\Messenger\Traits\Webhook\WebhookNotifierTrait;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Uid\Uuid;
 
 trait HandlerTrait
 {
     use MetricsTrait;
+    use WebhookNotifierTrait;
 
     private string $handlerName = '';
     private Uuid $idExecution;
@@ -86,13 +91,33 @@ trait HandlerTrait
 
     private function handleFailure(Context $context, ?AbstractStep $step, string $errorMessage, string $handlerName): void
     {
+        // Log
         $idExecution = $this->getIdExecution();
-        $this->log($context->getScenario()->getId(), $idExecution, Logs::ERROR_STEP->getLog(['name' => $this->getStepName(), 'handler' => $handlerName, 'message' => $errorMessage]), null !== $step ? $step->getId() : Uuid::v6(), null, null);
+        $this->log(
+            $context->getScenario()->getId(),
+            $idExecution,
+            Logs::ERROR_STEP->getLog(['name' => $this->getStepName(), 'handler' => $handlerName, 'message' => $errorMessage]),
+            null !== $step ? $step->getId() : Uuid::v6(),
+            null,
+            null
+        );
         if (null === $step) {
             return;
         }
-        $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
-        $this->handleMessage($context, $nextStepMessage);
+
+        // Notify Webhooks
+        $this->notifyWebhooks($context->getScenario(), WebhookEventType::ON_FAILURE, $errorMessage);
+    }
+
+    private function notifyWebhooks(Scenario $scenario, WebhookEventType $eventType, string $message): void
+    {
+        foreach ($scenario->getWebhooks() as $webhook) {
+            if (!$webhook instanceof Webhook || empty($webhook->getUrl()) || $webhook->getEventType() !== $eventType) {
+                continue;
+            }
+            $payload = $this->formatWebhookPayload($webhook, $scenario, $eventType, $message);
+            $this->sendWebhookNotification($webhook->getUrl(), $payload);
+        }
     }
 
     private function handleMessage(Context $context, Envelope|AbstractMessage|null $nextStepMessage): void

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Messenger\Handler\Sleep;
 
 use App\Entity\AbstractStep;
+use App\Entity\Context;
 use App\Entity\SleepStep;
 use App\Entity\Traits\EntityManagerTrait;
 use App\Entity\Traits\LoggerTrait;
@@ -20,6 +21,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler]
 final class SleepMessageHandler extends AbstractMessageHandler
@@ -30,12 +32,13 @@ final class SleepMessageHandler extends AbstractMessageHandler
     use LoggerTrait;
     use PropertyAccessTrait;
 
-    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager)
+    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager, HttpClientInterface $client)
     {
         parent::__construct($bus);
         $this->setPropertyAccess(PropertyAccess::createPropertyAccessor());
         $this->setEntityManager($entityManager);
         $this->setHandlerName(SleepLogs::HANDLER_NAME->value);
+        $this->setClient($client);
     }
 
     public function __invoke(SleepMessage $message): void
@@ -70,11 +73,11 @@ final class SleepMessageHandler extends AbstractMessageHandler
         } catch (\Exception $e) {
             $this->handleError($context, $step ?? null, $e);
         } finally {
-            $this->logEndStep($idScenario, $idExecution, $step ?? null, null, $this->getError() ?? null);
+            $this->endStep($context, $idScenario, $idExecution, $step ?? null, null, $this->getError() ?? null);
         }
     }
 
-    private function logEndStep(Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?SleepStep $stepInContext, ?string $error): void
+    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?SleepStep $stepInContext, ?string $error): void
     {
         $this->log(
             $idScenario,
@@ -84,5 +87,14 @@ final class SleepMessageHandler extends AbstractMessageHandler
             $stepInContext ?? ($step ?? null),
             $error
         );
+
+        // Next step
+        $nextStepMessage = null;
+        if (null !== $step) {
+            $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+        }
+        $this->handleMessage($context, $nextStepMessage);
+
+        $this->setError(null);
     }
 }

@@ -75,12 +75,11 @@ final class HttpMessageHandler extends AbstractMessageHandler
         } catch (\Exception $e) {
             $this->handleError($context, $step ?? null, $e);
         } finally {
-            $this->logEndStep($context, $idScenario, $idExecution, $step ?? null, $stepInContext ?? null, $this->getError() ?? null);
-            $this->setError(null);
+            $this->endStep($context, $idScenario, $idExecution, $step ?? null, $stepInContext ?? null, $this->getError() ?? null);
         }
     }
 
-    private function logEndStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?ContextHttpStep $stepInContext, ?string $error): void
+    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?ContextHttpStep $stepInContext, ?string $error): void
     {
         if (null !== $stepInContext) {
             $stepInContext = $this->replaceDynamicVariablesInStep($context, $stepInContext);
@@ -96,6 +95,16 @@ final class HttpMessageHandler extends AbstractMessageHandler
             $stepInContext ?? ($step ?? null),
             $error
         );
+
+        // Next step
+        // Next step
+        $nextStepMessage = null;
+        if (null !== $step) {
+            $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+        }
+        $this->handleMessage($context, $nextStepMessage);
+
+        $this->setError(null);
     }
 
     private function replaceDynamicVariablesInStep(Context $context, AbstractStep $step): AbstractStep

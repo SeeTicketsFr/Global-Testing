@@ -27,7 +27,7 @@ class Webhook
     #[Assert\NotBlank]
     #[ORM\ManyToOne(targetEntity: Scenario::class, inversedBy: 'webhooks')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    private Scenario $scenario;
+    private ?Scenario $scenario;
 
     #[ORM\Column(type: 'string', enumType: WebhookEventType::class)]
     #[Assert\NotBlank]

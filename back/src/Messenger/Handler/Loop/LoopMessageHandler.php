@@ -74,11 +74,11 @@ final class LoopMessageHandler extends AbstractMessageHandler
         } catch (\Exception $e) {
             $this->handleFailure($context, $step, $e->getMessage(), $this->handlerName);
         } finally {
-            $this->logEndStep($idScenario, $idExecution, $step ?? null, null, $this->getError());
+            $this->endStep($context, $idScenario, $idExecution, $step ?? null, null, $this->getError());
         }
     }
 
-    private function logEndStep(Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?LoopStep $stepInContext, ?string $error): void
+    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?LoopStep $stepInContext, ?string $error): void
     {
         $this->log(
             $idScenario,
@@ -88,6 +88,15 @@ final class LoopMessageHandler extends AbstractMessageHandler
             $stepInContext ?? ($step ?? null),
             $error
         );
+
+        // Next step
+        $nextStepMessage = null;
+        if (null !== $step) {
+            $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+        }
+        $this->handleMessage($context, $nextStepMessage);
+
+        $this->setError(null);
     }
 
     private function getCurrentStepInContext(Context $context, AbstractStep $step): LoopStep

@@ -23,6 +23,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler]
 final class SqsMessageHandler extends AbstractMessageHandler
@@ -35,13 +36,14 @@ final class SqsMessageHandler extends AbstractMessageHandler
 
     private ?SqsClient $sqsClient;
 
-    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager, ?SqsClient $sqsClient = null)
+    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager, ?SqsClient $sqsClient, HttpClientInterface $client)
     {
         parent::__construct($bus);
         $this->setPropertyAccess(PropertyAccess::createPropertyAccessor());
         $this->setEntityManager($entityManager);
         $this->setHandlerName(SqsLogs::HANDLER_NAME->value);
         $this->sqsClient = $sqsClient;
+        $this->setClient($client);
     }
 
     public function __invoke(SqsMessage $message): void
@@ -80,11 +82,11 @@ final class SqsMessageHandler extends AbstractMessageHandler
         } catch (\Exception $e) {
             $this->handleError($context, $step ?? null, $e);
         } finally {
-            $this->logEndStep($idScenario, $idExecution, $step ?? null, $stepInContext ?? null, $this->getError() ?? null);
+            $this->endStep($context, $idScenario, $idExecution, $step ?? null, $stepInContext ?? null, $this->getError() ?? null);
         }
     }
 
-    private function logEndStep(Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?ContextSqsStep $stepInContext, ?string $error): void
+    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?ContextSqsStep $stepInContext, ?string $error): void
     {
         $this->log(
             $idScenario,
@@ -94,6 +96,15 @@ final class SqsMessageHandler extends AbstractMessageHandler
             $stepInContext ?? ($step ?? null),
             $error
         );
+
+        // Next step
+        $nextStepMessage = null;
+        if (null !== $step) {
+            $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+        }
+        $this->handleMessage($context, $nextStepMessage);
+
+        $this->setError(null);
     }
 
     private function createClient(string $version, string $region, string $accessKey, string $secretKey): SqsClient

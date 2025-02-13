@@ -16,7 +16,6 @@ use Symfony\Component\Scheduler\ScheduleProviderInterface;
 #[AsSchedule('dataretention')]
 class DataRetentionScheduleProvider implements ScheduleProviderInterface
 {
-
     private Schedule $schedule;
     private LoggerInterface $logger;
 
@@ -29,7 +28,8 @@ class DataRetentionScheduleProvider implements ScheduleProviderInterface
     public function getSchedule(): Schedule
     {
         $this->logger->info('Initializing data retention schedule.');
-        $this->schedule->add(RecurringMessage::cron("0 0 * * *", new RedispatchMessage(new DeleteLogsMessage(), 'async')));
+        $this->schedule->add(RecurringMessage::cron('0 0 * * *', new RedispatchMessage(new DeleteLogsMessage(), 'async')));
+
         return $this->schedule;
     }
 
