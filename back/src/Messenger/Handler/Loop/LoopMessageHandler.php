@@ -20,7 +20,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler]
@@ -59,7 +58,7 @@ final class LoopMessageHandler extends AbstractMessageHandler
                 throw new \Exception(Logs::STEP_NOT_FOUND->getLog());
             }
             $this->setStepName($step->getName());
-            $this->logBeginStep($idScenario, $idExecution, $step);
+            $this->beginStep($idScenario, $idExecution, $step);
             $conditions = $step->getConditions();
             if (null === $conditions) {
                 throw new \Exception(Logs::ERROR_STEP->getLog(['name' => $step->getName(), 'handler' => $this->handlerName, 'message' => LoopLogs::MISSING_PARAMETERS->value]));
@@ -76,27 +75,6 @@ final class LoopMessageHandler extends AbstractMessageHandler
         } finally {
             $this->endStep($context, $idScenario, $idExecution, $step ?? null, null, $this->getError());
         }
-    }
-
-    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?LoopStep $stepInContext, ?string $error): void
-    {
-        $this->log(
-            $idScenario,
-            $idExecution,
-            Logs::END_STEP->getLog(['name' => $this->getStepName(), 'handler' => $this->handlerName]),
-            isset($step) ? $step->getId() : Uuid::v6(),
-            $stepInContext ?? ($step ?? null),
-            $error
-        );
-
-        // Next step
-        $nextStepMessage = null;
-        if (null !== $step) {
-            $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
-        }
-        $this->handleMessage($context, $nextStepMessage);
-
-        $this->setError(null);
     }
 
     private function getCurrentStepInContext(Context $context, AbstractStep $step): LoopStep

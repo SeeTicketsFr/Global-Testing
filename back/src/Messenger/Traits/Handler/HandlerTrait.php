@@ -72,7 +72,7 @@ trait HandlerTrait
         return $this;
     }
 
-    private function logBeginStep(Uuid $idScenario, Uuid $idExecution, AbstractStep $step): void
+    private function beginStep(Uuid $idScenario, Uuid $idExecution, AbstractStep $step): void
     {
         $this->log(
             $idScenario,
@@ -128,5 +128,26 @@ trait HandlerTrait
             return;
         }
         $this->sendMessage($nextStepMessage);
+    }
+
+    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?AbstractStep $stepInContext, ?string $error): void
+    {
+        $this->log(
+            $idScenario,
+            $idExecution,
+            Logs::END_STEP->getLog(['name' => $this->getStepName(), 'handler' => $this->handlerName]),
+            isset($step) ? $step->getId() : Uuid::v6(),
+            $stepInContext ?? ($step ?? null),
+            $error
+        );
+
+        // Next step
+        $nextStepMessage = null;
+        if (null !== $step) {
+            $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+        }
+        $this->handleMessage($context, $nextStepMessage);
+
+        $this->setError(null);
     }
 }

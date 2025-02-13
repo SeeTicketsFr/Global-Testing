@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Messenger\Handler\Sleep;
 
-use App\Entity\AbstractStep;
-use App\Entity\Context;
 use App\Entity\SleepStep;
 use App\Entity\Traits\EntityManagerTrait;
 use App\Entity\Traits\LoggerTrait;
@@ -20,7 +18,6 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler]
@@ -59,7 +56,7 @@ final class SleepMessageHandler extends AbstractMessageHandler
             }
 
             $this->setStepName($step->getName());
-            $this->logBeginStep($idScenario, $idExecution, $step);
+            $this->beginStep($idScenario, $idExecution, $step);
 
             $nextStepMessage = $this->getNextStep($context, $step->getStepNumber() + 1);
             $envelope = null;
@@ -75,26 +72,5 @@ final class SleepMessageHandler extends AbstractMessageHandler
         } finally {
             $this->endStep($context, $idScenario, $idExecution, $step ?? null, null, $this->getError() ?? null);
         }
-    }
-
-    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?SleepStep $stepInContext, ?string $error): void
-    {
-        $this->log(
-            $idScenario,
-            $idExecution,
-            Logs::END_STEP->getLog(['name' => $this->getStepName(), 'handler' => $this->handlerName]),
-            isset($step) ? $step->getId() : Uuid::v6(),
-            $stepInContext ?? ($step ?? null),
-            $error
-        );
-
-        // Next step
-        $nextStepMessage = null;
-        if (null !== $step) {
-            $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
-        }
-        $this->handleMessage($context, $nextStepMessage);
-
-        $this->setError(null);
     }
 }
