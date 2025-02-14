@@ -127,7 +127,7 @@ class HttpMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Http step_1', 'handler' => HttpLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => false,
-            'dbQueryCount' => 9,
+            'dbQueryCount' => 8,
         ];
 
         yield 'HttpStep : with next step' => [
@@ -158,7 +158,7 @@ class HttpMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Http step_1', 'handler' => HttpLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => true,
-            'dbQueryCount' => 8,
+            'dbQueryCount' => 7,
         ];
     }
 

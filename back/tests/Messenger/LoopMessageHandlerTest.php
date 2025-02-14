@@ -80,7 +80,7 @@ class LoopMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Loop step_1', 'handler' => LoopLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => false,
-            'dbQueryCount' => 9,
+            'dbQueryCount' => 8,
         ];
 
         yield 'LoopStep with next step' => [
@@ -109,7 +109,7 @@ class LoopMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Loop step_1', 'handler' => LoopLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => true,
-            'dbQueryCount' => 8,
+            'dbQueryCount' => 7,
         ];
     }
 

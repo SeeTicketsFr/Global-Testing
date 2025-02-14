@@ -65,7 +65,9 @@ final class ScenarioMessageHandler extends AbstractMessageHandler
     private function sendFirstStepMessage(Context $context, int $stepNumber = 1): void
     {
         $nextStepMessage = $this->getNextStep($context, $stepNumber);
-        $this->handleMessage($context, $nextStepMessage);
+        if ($nextStepMessage) {
+            $this->sendMessage($nextStepMessage);
+        }
     }
 
     private function logBeginScenario(Uuid $idScenario, Scenario $scenario): void

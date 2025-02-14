@@ -76,11 +76,17 @@ final class SqsMessageHandler extends AbstractMessageHandler
             $stepInContext = $this->updateContext($context, $step, $result);
 
             $nextStepMessage = $this->getNextStep($context, $step->getStepNumber() + 1);
-            $this->handleMessage($context, $nextStepMessage);
         } catch (\Exception $e) {
+            $nextStepMessage = null;
+            if (null !== $step) {
+                $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+            }
             $this->handleError($context, $step ?? null, $e);
         } finally {
-            $this->endStep($context, $idScenario, $idExecution, $step ?? null, $stepInContext ?? null, $this->getError() ?? null);
+            $nextStepMessage ??= null;
+            $stepInContext ??= null;
+            $step ??= null;
+            $this->endStep($context, $idScenario, $idExecution, $step, $stepInContext, $this->getError() ?? null, $nextStepMessage);
         }
     }
 

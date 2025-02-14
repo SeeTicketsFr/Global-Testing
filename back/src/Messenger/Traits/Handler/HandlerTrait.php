@@ -91,7 +91,6 @@ trait HandlerTrait
 
     private function handleFailure(Context $context, ?AbstractStep $step, string $errorMessage, string $handlerName): void
     {
-        // Log
         $idExecution = $this->getIdExecution();
         $this->log(
             $context->getScenario()->getId(),
@@ -101,12 +100,6 @@ trait HandlerTrait
             null,
             null
         );
-        if (null === $step) {
-            return;
-        }
-
-        // Notify Webhooks
-        $this->notifyWebhooks($context->getScenario(), WebhookEventType::ON_FAILURE, $errorMessage);
     }
 
     private function notifyWebhooks(Scenario $scenario, WebhookEventType $eventType, string $message): void
@@ -120,17 +113,7 @@ trait HandlerTrait
         }
     }
 
-    private function handleMessage(Context $context, Envelope|AbstractMessage|null $nextStepMessage): void
-    {
-        if (null === $nextStepMessage) {
-            $this->updateScenarioMetrics($context->getScenario(), $this->idExecution);
-
-            return;
-        }
-        $this->sendMessage($nextStepMessage);
-    }
-
-    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?AbstractStep $stepInContext, ?string $error): void
+    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?AbstractStep $stepInContext, ?string $error, AbstractMessage|Envelope|null $nextStepMessage): void
     {
         $this->log(
             $idScenario,
@@ -141,12 +124,16 @@ trait HandlerTrait
             $error
         );
 
-        // Next step
-        $nextStepMessage = null;
-        if (null !== $step) {
-            $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+        if (null !== $nextStepMessage) {
+            $this->sendMessage($nextStepMessage);
+        } else {
+            $this->notifyWebhooks(
+                $context->getScenario(),
+                null === $error ? WebhookEventType::ON_SUCCESS : WebhookEventType::ON_FAILURE,
+                null === $error ? 'The scenario ended successfully.' : $error
+            );
+            $this->updateScenarioMetrics($context->getScenario(), $this->idExecution);
         }
-        $this->handleMessage($context, $nextStepMessage);
 
         $this->setError(null);
     }

@@ -68,12 +68,16 @@ final class LoopMessageHandler extends AbstractMessageHandler
             $stepNumberNextStep = $this->verifyConditions($context, $contextCurrentStep, $conditions);
 
             $nextStepMessage = $this->getNextStep($context, (int) $stepNumberNextStep);
-
-            $this->handleMessage($context, $nextStepMessage);
         } catch (\Exception $e) {
-            $this->handleFailure($context, $step, $e->getMessage(), $this->handlerName);
+            $nextStepMessage = null;
+            if (null !== $step) {
+                $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+            }
+            $this->handleError($context, $step ?? null, $e);
         } finally {
-            $this->endStep($context, $idScenario, $idExecution, $step ?? null, null, $this->getError());
+            $nextStepMessage ??= null;
+            $step ??= null;
+            $this->endStep($context, $idScenario, $idExecution, $step, null, $this->getError() ?? null, $nextStepMessage);
         }
     }
 

@@ -70,12 +70,16 @@ final class HttpMessageHandler extends AbstractMessageHandler
             $stepInContext = $this->updateContext($context, $step, $response);
 
             $nextStepMessage = $this->getNextStep($context, $step->getStepNumber() + 1);
-            $this->handleMessage($context, $nextStepMessage);
         } catch (\Exception $e) {
+            $nextStepMessage = null;
+            if (null !== $step) {
+                $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+            }
             $this->handleError($context, $step ?? null, $e);
         } finally {
             $stepInContext ??= null;
             $step ??= null;
+            $nextStepMessage ??= null;
 
             if (null !== $stepInContext) {
                 $stepInContext = $this->replaceDynamicVariablesInStep($context, $stepInContext);
@@ -83,7 +87,7 @@ final class HttpMessageHandler extends AbstractMessageHandler
                 $step = $this->replaceDynamicVariablesInStep($context, $step);
             }
 
-            $this->endStep($context, $idScenario, $idExecution, $step, $stepInContext, $this->getError() ?? null);
+            $this->endStep($context, $idScenario, $idExecution, $step, $stepInContext, $this->getError() ?? null, $nextStepMessage);
         }
     }
 

@@ -109,7 +109,7 @@ class SqsMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Sqs step_1', 'handler' => SqsLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => false,
-            'dbQueryCount' => 9,
+            'dbQueryCount' => 8,
         ];
 
         yield 'SqsStep with next step' => [
@@ -144,7 +144,7 @@ class SqsMessageHandlerTest extends AbstractApiTestCase
                 Logs::END_STEP->getLog(['name' => 'Sqs step_1', 'handler' => SqsLogs::HANDLER_NAME->value]),
             ],
             'hasNextStep' => true,
-            'dbQueryCount' => 8,
+            'dbQueryCount' => 7,
         ];
     }
 

@@ -7,7 +7,6 @@ use ApiPlatform\State\Pagination\ArrayPaginator;
 use ApiPlatform\State\Pagination\PartialPaginatorInterface;
 use ApiPlatform\State\ProviderInterface;
 use App\Entity\Webhook;
-use App\Repository\LogRepository;
 use App\Repository\WebhookRepository;
 use Symfony\Component\HttpFoundation\Request;
 

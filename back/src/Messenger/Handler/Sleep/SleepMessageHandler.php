@@ -65,12 +65,12 @@ final class SleepMessageHandler extends AbstractMessageHandler
                     new DelayStamp($step->getDuration()),
                 ]);
             }
-
-            $this->handleMessage($context, $envelope);
         } catch (\Exception $e) {
             $this->handleError($context, $step ?? null, $e);
         } finally {
-            $this->endStep($context, $idScenario, $idExecution, $step ?? null, null, $this->getError() ?? null);
+            $envelope ??= null;
+            $step ??= null;
+            $this->endStep($context, $idScenario, $idExecution, $step, null, $this->getError() ?? null, $envelope);
         }
     }
 }
