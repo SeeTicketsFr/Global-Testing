@@ -137,7 +137,7 @@ export default function AddStep(props: AddStepProps) {
                     accessKey: '',
                     secretKey: '',
                     messageGroupId: '',
-                    content: []
+                    content: {}
                 }
 
                 addSqsStep(sqsStepJsonld)

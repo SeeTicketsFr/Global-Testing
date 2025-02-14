@@ -1,9 +1,9 @@
-import { ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead } from "@/services"
+import { ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from "@/services"
 import { CircleCheck, CircleX } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface IExecutionsMetrics {
-    metrics: ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead
+    metrics: ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead
 }
 
 export default function ExecutionsMetrics({ metrics }: IExecutionsMetrics) {

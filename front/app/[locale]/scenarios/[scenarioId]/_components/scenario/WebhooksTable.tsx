@@ -32,7 +32,7 @@ import { deleteWebhook } from "@/app/_store/Webhook"
 import AddWebhook from "./AddWebhook"
 
 interface WebhooksTableProps {
-    idScenario: string | undefined
+    idScenario: string
 }
 
 export function WebhooksTable({ idScenario }: WebhooksTableProps) {
@@ -224,6 +224,7 @@ export function WebhooksTable({ idScenario }: WebhooksTableProps) {
                 )}
                 {editingWebhooks && (
                     <AddWebhook
+                        idScenario={idScenario}
                         webhook={editingWebhooks}
                         setWebhook={setEditingWebhooks}
                     />

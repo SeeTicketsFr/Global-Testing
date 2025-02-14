@@ -21,7 +21,7 @@ import { handleSave, unformatStep } from "@/app/_store/utils";
 import { toast } from "@/components/ui/use-toast";
 import _ from "lodash";
 import { Scenario } from "@/app/_type/Scenario";
-import { ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead } from "@/services";
+import { ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from "@/services";
 
 interface StepProps {
   step: StepsAppTyped,
@@ -133,7 +133,7 @@ export function StepsList() {
     Promise.all(savePromises)
       .then(() => {
         const updatedInitialScenarioSteps = scenario.steps.map((step) => unformatStep(step));
-        setInitialScenario((prevInitialScenario: ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead) => ({
+        setInitialScenario((prevInitialScenario: ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead) => ({
           ...prevInitialScenario,
           steps: updatedInitialScenarioSteps,
         }));

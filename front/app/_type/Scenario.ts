@@ -1,5 +1,5 @@
 import { StepsAppTyped } from "@/app/_type/Step";
-import { ScenarioMetrics, ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead } from "@/services";
+import { ScenarioMetrics, ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from "@/services";
 import { Log } from "@/services/models/log";
 
 export interface Scenario {
@@ -9,7 +9,7 @@ export interface Scenario {
     steps: StepsAppTyped[]
     variables: { [key: string]: string; } | undefined,
     cron: string | undefined | null
-    metrics: ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead | undefined | null
+    metrics: ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead | undefined | null
 }
 
 export interface ScenarioExecution extends Scenario {

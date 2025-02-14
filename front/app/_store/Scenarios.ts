@@ -3,7 +3,7 @@ import { ScenarioApi, ScenarioApiScenariosIdPatchRequest, ScenarioApiScenariosPo
 import { formatScenario } from "./utils";
 import { ApiScenariosGetCollection200Response } from "@/services/models/api-scenarios-get-collection200-response";
 import { AxiosResponse } from "axios";
-import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead } from "@/services";
+import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from "@/services";
 const scenarioApi = new ScenarioApi();
 
 
@@ -29,7 +29,7 @@ export async function addScenario({ name }: AddScenarioProps) {
 			name: name
 		}
 	};
-	return await scenarioApi.scenariosPost({ ...scenarioJsonldScenarioWrite }).then(async (scenario: AxiosResponse<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead>) => {
+	return await scenarioApi.scenariosPost({ ...scenarioJsonldScenarioWrite }).then(async (scenario: AxiosResponse<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>) => {
 			return formatScenario(scenario.data)
 	  });
   };
@@ -59,7 +59,7 @@ interface GetScenarioProps {
 }
 
 export async function getScenario(id: GetScenarioProps) {
-  	return await scenarioApi.scenariosIdGet(id).then(async (response: AxiosResponse<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead>) => {
+  	return await scenarioApi.scenariosIdGet(id).then(async (response: AxiosResponse<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>) => {
 		return response.data;
 	});
 };

@@ -18,13 +18,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from "@/components/ui/input";
 import { useTranslations } from "next-intl";
 import { toast } from "@/components/ui/use-toast";
-import { Webhook } from "@/services";
+import { Webhook, WebhookEventTypeEnum } from "@/services";
 import _ from "lodash";
 import { useWebhooks } from "@/app/_hooks/useWebhooks";
 import { WebhookEventType } from "./WebhookEventType";
 
 const formSchema = z.object({
-    eventType: z.string(),
+    eventType: z.nativeEnum(WebhookEventTypeEnum),
     url: z.string(),
 })
 
@@ -43,7 +43,7 @@ export default function AddWebhook({ idScenario, webhook, setWebhook }: IAddWebh
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            eventType: webhook?.eventType || "",
+            eventType: webhook?.eventType || WebhookEventTypeEnum.on_failure,
             url: webhook?.url || ""
         },
     })

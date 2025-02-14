@@ -14,7 +14,7 @@ import { handleSave, unformatStep } from "@/app/_store/utils";
 import { patchScenario } from "@/app/_store/Scenarios";
 import { RunAfterFailure } from "@/app/[locale]/scenarios/[scenarioId]/_components/common/RunAfterFailure";
 import ScenarioExecution from "@/components/shared-components/Logs/ScenarioExecution";
-import { ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead } from "@/services";
+import { ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from "@/services";
 
 export function CommonDashboardHeader() {
     const [scenario, setScenario] = useAtom(scenarioAtom);
@@ -58,7 +58,7 @@ export function CommonDashboardHeader() {
     Promise.all(savePromises)
       .then(() => {
         const updatedInitialScenarioSteps = scenario.steps.map((step: StepsAppTyped) => unformatStep(step));
-        setInitialScenario((prevInitialScenario: ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead) => ({
+        setInitialScenario((prevInitialScenario: ScenarioMetricsJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead) => ({
           ...prevInitialScenario,
           steps: updatedInitialScenarioSteps,
         }));
