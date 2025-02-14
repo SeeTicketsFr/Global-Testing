@@ -26,4 +26,5 @@ export * from './api/scenario-api';
 export * from './api/scenario-metrics-api';
 export * from './api/sleep-step-api';
 export * from './api/sqs-step-api';
+export * from './api/webhook-api';
 

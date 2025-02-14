@@ -12,6 +12,7 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabsModern";
+import Webhooks from './Webhooks';
 
 export function DashboardScenario() {
     const tDashboard = useTranslations('step.dashboard');
@@ -24,6 +25,10 @@ export function DashboardScenario() {
         {
             title: tDashboard('scheduler'),
             component: Scheduler,
+        },
+        {
+            title: tDashboard('webhooks'),
+            component: Webhooks
         },
         {
             title: tDashboard('executions'),

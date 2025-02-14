@@ -29,7 +29,7 @@ class ScenarioMessageHandlerTest extends AbstractApiTestCase
             'idScenario' => Uuid::fromString('016b1d91-a8df-6a09-90c2-56d8e6ef1fb6'),
             'expectedLog' => Logs::BEGIN_SCENARIO->getLog(['name' => 'Scenario 1', 'handler' => ScenarioLogs::HANDLER_NAME->value]),
             'hasNextStep' => true,
-            'dbQueryCount' => 6,
+            'dbQueryCount' => 7,
         ];
 
         yield 'Scenario with no step' => [
@@ -40,7 +40,7 @@ class ScenarioMessageHandlerTest extends AbstractApiTestCase
                 'message' => ScenarioLogs::SCENARIO_HAS_NO_STEP->value,
             ]),
             'hasNextStep' => false,
-            'dbQueryCount' => 6,
+            'dbQueryCount' => 7,
         ];
 
         yield 'Not existing scenario' => [

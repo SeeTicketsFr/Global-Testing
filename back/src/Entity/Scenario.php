@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 #[ApiResource(
     normalizationContext: [
-        'groups' => ['scenario:read', 'step:read', 'httpstep:read', 'loopstep:read', 'sleepstep:read', 'sqsstep:read', 'metrics:read'],
+        'groups' => ['scenario:read', 'step:read', 'httpstep:read', 'loopstep:read', 'sleepstep:read', 'sqsstep:read', 'metrics:read', 'webhook:read'],
     ],
     denormalizationContext: ['groups' => ['scenario:write']],
 )]
@@ -39,6 +39,13 @@ class Scenario
     private Collection $steps;
 
     /**
+     * @var Collection<int, Webhook>
+     */
+    #[ORM\OneToMany(mappedBy: 'scenario', targetEntity: Webhook::class, cascade: ['persist', 'remove'], fetch: 'EAGER')]
+    #[Groups(['webhook:read'])]
+    private Collection $webhooks;
+
+    /**
      * @var array<string, string>
      */
     #[ORM\Column(type: Types::JSON, nullable: true, options: ['jsonb' => true])]
@@ -57,6 +64,7 @@ class Scenario
     {
         $this->id = Uuid::v6();
         $this->steps = new ArrayCollection();
+        $this->webhooks = new ArrayCollection();
     }
 
     public function getId(): Uuid
@@ -110,6 +118,38 @@ class Scenario
     {
         if ($this->steps->removeElement($step) && $step->getScenario() === $this) {
             $step->setScenario(null);
+        }
+
+        return $this;
+    }
+
+    public function hasWebhooks(): bool
+    {
+        return \count($this->webhooks) > 0;
+    }
+
+    /**
+     * @return Collection<int, Webhook>
+     */
+    public function getWebhooks(): Collection
+    {
+        return $this->webhooks;
+    }
+
+    public function addWebhook(Webhook $webhook): self
+    {
+        if (!$this->webhooks->contains($webhook)) {
+            $this->webhooks[] = $webhook;
+            $webhook->setScenario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWebhook(Webhook $webhook): self
+    {
+        if ($this->webhooks->removeElement($webhook) && $webhook->getScenario() === $this) {
+            $webhook->setScenario(null);
         }
 
         return $this;

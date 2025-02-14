@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Messenger\Handler\Sqs;
 
-use App\Entity\AbstractStep;
 use App\Entity\Context;
 use App\Entity\ContextSqsStep;
 use App\Entity\POPO\SqsResponse;
@@ -22,7 +21,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler]
 final class SqsMessageHandler extends AbstractMessageHandler
@@ -35,13 +34,14 @@ final class SqsMessageHandler extends AbstractMessageHandler
 
     private ?SqsClient $sqsClient;
 
-    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager, ?SqsClient $sqsClient = null)
+    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager, ?SqsClient $sqsClient, HttpClientInterface $client)
     {
         parent::__construct($bus);
         $this->setPropertyAccess(PropertyAccess::createPropertyAccessor());
         $this->setEntityManager($entityManager);
         $this->setHandlerName(SqsLogs::HANDLER_NAME->value);
         $this->sqsClient = $sqsClient;
+        $this->setClient($client);
     }
 
     public function __invoke(SqsMessage $message): void
@@ -62,7 +62,7 @@ final class SqsMessageHandler extends AbstractMessageHandler
             }
 
             $this->setStepName($step->getName());
-            $this->logBeginStep($idScenario, $idExecution, $step);
+            $this->beginStep($idScenario, $idExecution, $step);
 
             [$url, $region, $accessKey, $secretKey, $messageGroupId, $content] = $this->replaceDynamicVariables($context, $step, $step->getUrl(), $step->getRegion(), $step->getAccessKey(), $step->getSecretKey(), $step->getMessageGroupId(), $step->getContent(), $step->getVariables());
 
@@ -76,24 +76,18 @@ final class SqsMessageHandler extends AbstractMessageHandler
             $stepInContext = $this->updateContext($context, $step, $result);
 
             $nextStepMessage = $this->getNextStep($context, $step->getStepNumber() + 1);
-            $this->handleMessage($context, $nextStepMessage);
         } catch (\Exception $e) {
+            $nextStepMessage = null;
+            if (null !== $step) {
+                $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+            }
             $this->handleError($context, $step ?? null, $e);
         } finally {
-            $this->logEndStep($idScenario, $idExecution, $step ?? null, $stepInContext ?? null, $this->getError() ?? null);
+            $nextStepMessage ??= null;
+            $stepInContext ??= null;
+            $step ??= null;
+            $this->endStep($context, $idScenario, $idExecution, $step, $stepInContext, $this->getError() ?? null, $nextStepMessage);
         }
-    }
-
-    private function logEndStep(Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?ContextSqsStep $stepInContext, ?string $error): void
-    {
-        $this->log(
-            $idScenario,
-            $idExecution,
-            Logs::END_STEP->getLog(['name' => $this->getStepName(), 'handler' => $this->handlerName]),
-            isset($step) ? $step->getId() : Uuid::v6(),
-            $stepInContext ?? ($step ?? null),
-            $error
-        );
     }
 
     private function createClient(string $version, string $region, string $accessKey, string $secretKey): SqsClient

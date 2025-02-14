@@ -93,7 +93,8 @@
             "treatments": "Traitements",
             "conditions": "Conditions",
             "scheduler": "Planification",
-            "executions": "Exécutions"
+            "executions": "Exécutions",
+            "webhooks": "Webhooks"
         },
         "step": "Étape",
         "steps": "Étapes",
@@ -263,6 +264,38 @@
         "result": "Résultats",
         "complementary_data": "Données complémentaires"
     },
+    "webhooks": {
+        "manage": "Gérez vos webhooks",
+        "no_result": "Ajoutez votre premier webhook",
+        "table": {
+            "columns": {
+                "event_type": "Type d'évènement",
+                "url": "Url",
+                "actions": {
+                    "title": "Actions",
+                    "open_menu": "Ouvrir le menu",
+                    "actions": "Actions",
+                    "edit": "Modifier",
+                    "delete": "Supprimer"
+                }
+            },
+            "total_items": "Total de {totalItems} webhook(s).",
+            "previous": "Précédent",
+            "next": "Suivant"
+        },
+        "creation": {
+            "add": "Ajouter un webhook",
+            "input_event_type": "Type d'évènement",
+            "placeholder_input_event_type": "Type d'évènement du webhook...",
+            "input_url": "Url",
+            "placeholder_input_url": "Url du webhook...",
+            "add_title": "Status de création du webhook"
+        },
+        "modification": {
+            "modification": "Modification d'un webhook",
+            "modification_title": "Status de modification du webhook"
+        }
+    },
     "api_documentations": {
         "manage": "Gérez vos documentations API",
         "no_result": "Ajoutez votre première documentation API pour simplifier votre processus de création de scénarios",
@@ -293,6 +326,7 @@
             "add_failed_description": "La création de la documentation api {apiDocumentationName} a échoué !"
         },
         "modification": {
+            "modification": "Modification d'une documentation api",
             "modification_title": "Status de modification de la documentation api",
             "modification_description": "La documentation api {apiDocumentationName} a été modifiée !",
             "modification_failed_description": "La modification de la documentation api {apiDocumentationName} a échoué !"

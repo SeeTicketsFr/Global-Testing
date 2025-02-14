@@ -23,7 +23,6 @@ use Faker\Factory;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler]
@@ -65,37 +64,31 @@ final class HttpMessageHandler extends AbstractMessageHandler
             }
 
             $this->setStepName($step->getName());
-            $this->logBeginStep($idScenario, $idExecution, $step);
+            $this->beginStep($idScenario, $idExecution, $step);
 
             $response = $this->handleRequest($step, $context);
             $stepInContext = $this->updateContext($context, $step, $response);
 
             $nextStepMessage = $this->getNextStep($context, $step->getStepNumber() + 1);
-            $this->handleMessage($context, $nextStepMessage);
         } catch (\Exception $e) {
+            $nextStepMessage = null;
+            if (null !== $step) {
+                $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
+            }
             $this->handleError($context, $step ?? null, $e);
         } finally {
-            $this->logEndStep($context, $idScenario, $idExecution, $step ?? null, $stepInContext ?? null, $this->getError() ?? null);
-            $this->setError(null);
-        }
-    }
+            $stepInContext ??= null;
+            $step ??= null;
+            $nextStepMessage ??= null;
 
-    private function logEndStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?ContextHttpStep $stepInContext, ?string $error): void
-    {
-        if (null !== $stepInContext) {
-            $stepInContext = $this->replaceDynamicVariablesInStep($context, $stepInContext);
-        } elseif (null !== $step) {
-            $step = $this->replaceDynamicVariablesInStep($context, $step);
-        }
+            if (null !== $stepInContext) {
+                $stepInContext = $this->replaceDynamicVariablesInStep($context, $stepInContext);
+            } elseif (null !== $step) {
+                $step = $this->replaceDynamicVariablesInStep($context, $step);
+            }
 
-        $this->log(
-            $idScenario,
-            $idExecution,
-            Logs::END_STEP->getLog(['name' => $this->getStepName(), 'handler' => $this->handlerName]),
-            isset($step) ? $step->getId() : Uuid::v6(),
-            $stepInContext ?? ($step ?? null),
-            $error
-        );
+            $this->endStep($context, $idScenario, $idExecution, $step, $stepInContext, $this->getError() ?? null, $nextStepMessage);
+        }
     }
 
     private function replaceDynamicVariablesInStep(Context $context, AbstractStep $step): AbstractStep

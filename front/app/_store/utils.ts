@@ -9,7 +9,7 @@ import { LoopStep } from "@/services/models/loop-step";
 import { SleepStep } from "@/services/models/sleep-step";
 import { SqsStep } from "@/services/models/sqs-step";
 import { deleteSqsStep, patchSqsStep } from "./SqsStep";
-import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead } from "@/services";
+import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from "@/services";
 
 
 export function deleteStep(id: string, type: StepTypeEnum) {
@@ -83,7 +83,7 @@ export function unformatSteps(scenario: Scenario): any {
         : [];
 }
 
-export function formatSteps(scenario: ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead): any {
+export function formatSteps(scenario: ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead): any {
     return scenario.steps ?
         Object.entries(scenario.steps).map(([, step]) => {
             var globalStep = {
@@ -122,7 +122,7 @@ export function formatSteps(scenario: ScenarioJsonldScenarioReadStepReadHttpstep
         : [];
 }
 
-export function formatScenario(scenario: ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead): Scenario {
+export function formatScenario(scenario: ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead): Scenario {
 	return {
 		id: scenario.id ?? '',
         type: scenario['@type'],

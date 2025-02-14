@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadContext } from './abstract-step-jsonld-scenario-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read-metrics-read-context';
+import { AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext } from './abstract-step-jsonld-scenario-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read-metrics-read-webhook-read-context';
 
 /**
  * 
@@ -25,10 +25,10 @@ import { AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstep
 export interface SqsStepJsonldSqsstepReadStepRead {
     /**
      * 
-     * @type {AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadContext}
+     * @type {AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext}
      * @memberof SqsStepJsonldSqsstepReadStepRead
      */
-    '@context'?: AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadContext;
+    '@context'?: AbstractStepJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookReadContext;
     /**
      * 
      * @type {string}
@@ -103,9 +103,9 @@ export interface SqsStepJsonldSqsstepReadStepRead {
     'messageGroupId'?: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {{ [key: string]: string; }}
      * @memberof SqsStepJsonldSqsstepReadStepRead
      */
-    'content'?: Array<string>;
+    'content'?: { [key: string]: string; };
 }
 

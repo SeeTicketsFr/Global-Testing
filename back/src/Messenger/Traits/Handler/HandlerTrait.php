@@ -4,15 +4,20 @@ namespace App\Messenger\Traits\Handler;
 
 use App\Entity\AbstractStep;
 use App\Entity\Context;
+use App\Entity\Enum\WebhookEventType;
+use App\Entity\Scenario;
+use App\Entity\Webhook;
 use App\Messenger\Enum\Logs;
 use App\Messenger\Handler\AbstractMessage;
 use App\Messenger\Traits\Metrics\MetricsTrait;
+use App\Messenger\Traits\Webhook\WebhookNotifierTrait;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Uid\Uuid;
 
 trait HandlerTrait
 {
     use MetricsTrait;
+    use WebhookNotifierTrait;
 
     private string $handlerName = '';
     private Uuid $idExecution;
@@ -67,7 +72,7 @@ trait HandlerTrait
         return $this;
     }
 
-    private function logBeginStep(Uuid $idScenario, Uuid $idExecution, AbstractStep $step): void
+    private function beginStep(Uuid $idScenario, Uuid $idExecution, AbstractStep $step): void
     {
         $this->log(
             $idScenario,
@@ -87,21 +92,49 @@ trait HandlerTrait
     private function handleFailure(Context $context, ?AbstractStep $step, string $errorMessage, string $handlerName): void
     {
         $idExecution = $this->getIdExecution();
-        $this->log($context->getScenario()->getId(), $idExecution, Logs::ERROR_STEP->getLog(['name' => $this->getStepName(), 'handler' => $handlerName, 'message' => $errorMessage]), null !== $step ? $step->getId() : Uuid::v6(), null, null);
-        if (null === $step) {
-            return;
-        }
-        $nextStepMessage = $this->getNextStepBasedOnFailure($context, $step->getStepNumber());
-        $this->handleMessage($context, $nextStepMessage);
+        $this->log(
+            $context->getScenario()->getId(),
+            $idExecution,
+            Logs::ERROR_STEP->getLog(['name' => $this->getStepName(), 'handler' => $handlerName, 'message' => $errorMessage]),
+            null !== $step ? $step->getId() : Uuid::v6(),
+            null,
+            null
+        );
     }
 
-    private function handleMessage(Context $context, Envelope|AbstractMessage|null $nextStepMessage): void
+    private function notifyWebhooks(Scenario $scenario, WebhookEventType $eventType, string $message): void
     {
-        if (null === $nextStepMessage) {
-            $this->updateScenarioMetrics($context->getScenario(), $this->idExecution);
-
-            return;
+        foreach ($scenario->getWebhooks() as $webhook) {
+            if (!$webhook instanceof Webhook || empty($webhook->getUrl()) || $webhook->getEventType() !== $eventType) {
+                continue;
+            }
+            $payload = $this->formatWebhookPayload($webhook, $scenario, $eventType, $message);
+            $this->sendWebhookNotification($webhook->getUrl(), $payload);
         }
-        $this->sendMessage($nextStepMessage);
+    }
+
+    private function endStep(Context $context, Uuid $idScenario, Uuid $idExecution, ?AbstractStep $step, ?AbstractStep $stepInContext, ?string $error, AbstractMessage|Envelope|null $nextStepMessage): void
+    {
+        $this->log(
+            $idScenario,
+            $idExecution,
+            Logs::END_STEP->getLog(['name' => $this->getStepName(), 'handler' => $this->handlerName]),
+            isset($step) ? $step->getId() : Uuid::v6(),
+            $stepInContext ?? ($step ?? null),
+            $error
+        );
+
+        if (null !== $nextStepMessage) {
+            $this->sendMessage($nextStepMessage);
+        } else {
+            $this->notifyWebhooks(
+                $context->getScenario(),
+                null === $error ? WebhookEventType::ON_SUCCESS : WebhookEventType::ON_FAILURE,
+                null === $error ? 'The scenario ended successfully.' : $error
+            );
+            $this->updateScenarioMetrics($context->getScenario(), $this->idExecution);
+        }
+
+        $this->setError(null);
     }
 }

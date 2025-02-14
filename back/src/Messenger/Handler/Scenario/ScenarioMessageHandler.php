@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler]
 final class ScenarioMessageHandler extends AbstractMessageHandler
@@ -25,11 +26,12 @@ final class ScenarioMessageHandler extends AbstractMessageHandler
     use HandlerTrait;
     use LoggerTrait;
 
-    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager)
+    public function __construct(MessageBusInterface $bus, EntityManagerInterface $entityManager, HttpClientInterface $client)
     {
         parent::__construct($bus);
         $this->setEntityManager($entityManager);
         $this->setHandlerName(ScenarioLogs::HANDLER_NAME->value);
+        $this->setClient($client);
     }
 
     public function __invoke(ScenarioMessage $message): void
@@ -63,7 +65,9 @@ final class ScenarioMessageHandler extends AbstractMessageHandler
     private function sendFirstStepMessage(Context $context, int $stepNumber = 1): void
     {
         $nextStepMessage = $this->getNextStep($context, $stepNumber);
-        $this->handleMessage($context, $nextStepMessage);
+        if ($nextStepMessage) {
+            $this->sendMessage($nextStepMessage);
+        }
     }
 
     private function logBeginScenario(Uuid $idScenario, Scenario $scenario): void

@@ -10,7 +10,6 @@ export default async function ScenariosPage() {
     const [scenariosData] = await Promise.all([scenarios]);
     const t = await getTranslations('scenario');
 
-
     return (
         <section className="h-full w-full">
             <Navbar title={t('name')} />

@@ -88,9 +88,9 @@ export interface SqsStepJsonld {
     'messageGroupId'?: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {{ [key: string]: string; }}
      * @memberof SqsStepJsonld
      */
-    'content'?: Array<string>;
+    'content'?: { [key: string]: string; };
 }
 

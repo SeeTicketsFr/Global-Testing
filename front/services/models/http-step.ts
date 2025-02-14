@@ -73,10 +73,10 @@ export interface HttpStep {
     'url'?: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {{ [key: string]: string; }}
      * @memberof HttpStep
      */
-    'content'?: Array<string>;
+    'content'?: { [key: string]: string; };
     /**
      * 
      * @type {{ [key: string]: string; }}

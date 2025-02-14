@@ -21,7 +21,7 @@ import { ApiApiDocumentationsGetCollection200ResponseHydraSearch } from './api-a
 import { ApiApiDocumentationsGetCollection200ResponseHydraView } from './api-api-documentations-get-collection200-response-hydra-view';
 // May contain unused imports in some cases
 // @ts-ignore
-import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead } from './scenario-jsonld-scenario-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read-metrics-read';
+import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead } from './scenario-jsonld-scenario-read-step-read-httpstep-read-loopstep-read-sleepstep-read-sqsstep-read-metrics-read-webhook-read';
 
 /**
  * 
@@ -31,10 +31,10 @@ import { ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepRead
 export interface ApiScenariosGetCollection200Response {
     /**
      * 
-     * @type {Array<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead>}
+     * @type {Array<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>}
      * @memberof ApiScenariosGetCollection200Response
      */
-    'hydra:member': Array<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsRead>;
+    'hydra:member': Array<ScenarioJsonldScenarioReadStepReadHttpstepReadLoopstepReadSleepstepReadSqsstepReadMetricsReadWebhookRead>;
     /**
      * 
      * @type {number}
